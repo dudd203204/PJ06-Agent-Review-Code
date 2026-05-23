@@ -1,0 +1,34 @@
+graph TB
+    A["Config"] --> B["Input Files"]
+    B --> C{"Route?"}
+    C -->|formio| D1["4 Skills"]
+    C -->|backoffice| D2["1 Skill"]
+    D1 --> E["Execute Skills"]
+    D2 --> E
+    E --> F["Build Prompts"]
+    F --> G["Call LLM"]
+    G --> H{"Response?"}
+    H -->|JSON| I["Parse"]
+    H -->|List| J["Convert"]
+    H -->|Empty| K["Fill FAILED"]
+    I --> L["Validate"]
+    J --> L
+    K --> L
+    L --> M["Policy Check"]
+    M --> N["Create Output"]
+    N --> O["JSON + Excel"]
+    O --> P["Done"]
+    
+    style A fill:#a8d5a8
+    style B fill:#a8d5a8
+    style E fill:#fff9c4
+    style F fill:#ffe0b2
+    style G fill:#f8bbd0
+    style I fill:#90ee90
+    style J fill:#ffd700
+    style K fill:#ffd700
+    style L fill:#87ceeb
+    style M fill:#dda0dd
+    style N fill:#87ceeb
+    style O fill:#a8d5a8
+    style P fill:#90ee90

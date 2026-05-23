@@ -1,0 +1,30 @@
+{
+  "principals": {
+    "default": {
+      "layer": "application",
+      "allowed_skillsets": [
+        "*"
+      ],
+      "allowed_skills": [
+        "*"
+      ],
+      "allowed_tools": [
+        "*"
+      ]
+    },
+    "restricted_python_quality": {
+      "layer": "application",
+      "allowed_skillsets": [
+        "python_quality"
+      ],
+      "allowed_skills": [
+        "code_review"
+      ],
+      "allowed_tools": [
+        "read_project_file",
+        "list_project_files",
+        "list_skills"
+      ]
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "category": "Runtime",
+  "description": "This skill group explains how to review Form.io JSON files for unsafe calculated display values, JavaScript runtime errors or Form.io console warnings, and forbidden debug logging statements inside executable logic.",
+  "goal": "Review a Form.io JSON file and determine PASSED or FAILED for each check, with exact failure locations, reasons, and safer recommendations when a rule is violated.",
+  "output_style": {
+    "type": "structured_review",
+    "rules": [
+      "Review each check independently.",
+      "For every check, return PASSED or FAILED.",
+      "Do not assume a pass when evidence is missing.",
+      "If one item breaks the rule, that check must be FAILED.",
+      "If failed, clearly point out the exact component, logic block, script field, or JSON location that caused the failure.",
+      "When applicable, provide a safer recommended rewrite or cleanup suggestion."
+    ],
+    "format": {
+      "D1": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the component label that caused the failure and provide a safer rewrite suggestion using fallback values, proper property access, or safe formatting."
+      },
+      "D2": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the component label, unsafe JavaScript or Form.io warning risk, why it may cause console errors or warnings, and a safer rewrite suggestion."
+      },
+      "D3": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the component label that caused the failure and the line number in JSON where console.log appears."
+      }
+    }
+  },
+  "procedure": [
+    "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+    "Traverse all components recursively, including nested child components inside panels, containers, columns, fieldsets, tabs, datagrids, editgrids, and other wrappers.",
+    "Inspect all places that may contain display-value logic, JavaScript, executable logic, calculated expressions, custom conditions, validation scripts, triggers, and nested logic actions.",
+    "Apply each skill check independently.",
+    "Collect evidence for pass/fail decisions.",
+    "Return PASSED or FAILED for each skill with exact failure locations and recommendations when applicable."
+  ],
+  "skill": {
+    "D1": {
+      "review_item": "Calculated value components must not show [Object], undefined,....",
+      "description": "Review whether calculated display-value components are protected from showing invalid or user-unfriendly output such as [object Object], undefined, null, NaN, or broken concatenated strings.",
+      "goal": "Make sure calculated display values are safely formatted and do not expose raw objects, missing values, null values, undefined values, NaN, or broken text to users.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the label of the component that caused the failure and provide a safer rewrite suggestion using fallback values, proper property access, or safe formatting.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Employee Display Name\" may display broken text because calculatedValue uses data.employee + ' - ' + data.department. If data.employee is an object, the output may become \"[object Object] - Sales\". If data.department is missing, the output may become \"[object Object] - undefined\". Safer rewrite: value = `${data.employee?.name || ''}${data.department ? ' - ' + data.department : ''}`.trim();"
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Inspect all components that contain display-value logic.",
+        "Prioritize components with calculatedValue, calculateValue, customDefaultValue, logic actions that set value, and similar calculated display expressions if present.",
+        "For each calculated display expression, check whether the output may produce invalid or user-unfriendly display text.",
+        "Detect risky outputs such as [object Object], undefined, null, NaN, broken concatenated strings such as \"John undefined\", \"null - Sales\", \"undefined - undefined\", or similar malformed display values.",
+        "Treat direct object concatenation into strings as risky.",
+        "Treat implicit object-to-string conversion as risky.",
+        "Treat use of fields that may be empty, null, or undefined without fallback values as risky.",
+        "Treat arithmetic expressions as risky if they may produce NaN due to missing, non-numeric, null, or undefined values.",
+        "Treat text concatenation without missing-value handling as risky.",
+        "Check whether the expression uses safe property access when reading object fields.",
+        "Check whether the expression uses fallback values such as || '', ?? '', default labels, Number(... ) with validation, Array.isArray checks, optional chaining, or explicit null/undefined checks.",
+        "Check whether object values are converted intentionally using a meaningful property such as name, label, value, code, id, or another business-relevant field instead of relying on implicit string conversion.",
+        "Mark this check as PASSED only if all calculated display values are protected against invalid output.",
+        "Mark this check as FAILED if any calculated display value may display [object Object], undefined, null, NaN, or similarly broken output text."
+      ],
+      "skill": []
+    },
+    "D2": {
+      "review_item": "Console must not show any JS error (or FormIO warning because FormIO will catch error and show as warning in console)",
+      "description": "Review whether executable JavaScript logic is protected from runtime errors or Form.io console warnings.",
+      "goal": "Make sure Form.io logic does not produce JavaScript runtime errors or Form.io warnings in the browser console.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the component label, the risky JavaScript or Form.io warning source, why it may show a console error or warning, and a safer rewrite suggestion.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Customer Email\" uses calculateValue with data.customer.email.trim(). This may cause a console warning or JavaScript error when data.customer or data.customer.email is undefined. Safer rewrite: value = (data.customer?.email || '').trim();"
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse the full Form.io JSON recursively.",
+        "Inspect all places that may contain JavaScript or executable logic.",
+        "Include but do not limit inspection to calculateValue, calculatedValue, customDefaultValue, customConditional, conditional expressions, validate.custom, logic blocks, trigger.javascript, action.javascript, and any nested script fields.",
+        "Check whether any JavaScript expression may throw a runtime error during form rendering, value calculation, validation, condition evaluation, or logic execution.",
+        "Detect risky nested property access without parent checks, such as data.a.b.c, row.a.b, input.value.name, or component.custom.x.y.",
+        "Detect method calls on values that may be null or undefined, such as .trim(), .map(), .filter(), .forEach(), .toLowerCase(), .toUpperCase(), .split(), .replace(), .includes(), .length, or date and numeric methods.",
+        "Detect unsafe array operations without Array.isArray checks when the source may not be an array.",
+        "Detect unsafe JSON.parse usage without try/catch or input validation.",
+        "Detect arithmetic or date operations that may produce NaN or Invalid Date without fallback handling.",
+        "Detect references to dependency fields that may not exist at the time the logic runs.",
+        "Detect syntax patterns that are likely to be incomplete, malformed, or incompatible with the Form.io execution context.",
+        "Treat Form.io warnings caused by caught JavaScript errors as failures, because Form.io may catch runtime errors and display them as warnings in the browser console.",
+        "Accept safe patterns such as optional chaining, nullish coalescing, fallback values, explicit if checks, typeof checks, Array.isArray checks, try/catch for risky parsing, and guarded method calls.",
+        "Mark this check as PASSED only if all inspected executable logic is unlikely to produce JavaScript errors or Form.io warnings in the console.",
+        "Mark this check as FAILED if any logic block may produce a JavaScript runtime error or Form.io warning."
+      ],
+      "skill": []
+    },
+    "D3": {
+      "review_item": "Console must not show debug logs.",
+      "description": "Review whether Form.io executable logic contains forbidden debug logging statements.",
+      "goal": "Make sure production Form.io JSON does not contain console.log debug statements, except inside the component labeled \"ADMIN_Sys Attachment Auth\".",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the label of the component that caused the failure and the line number in JSON where console.log appears.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Approval Decision\" contains console.log at JSON line 428. Debug logs must be removed from Form.io logic before deployment."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse the full Form.io JSON recursively.",
+        "Inspect all places that may contain JavaScript or executable logic.",
+        "Include but do not limit inspection to logic blocks, trigger.javascript, action.javascript, calculateValue, calculatedValue, customDefaultValue, customConditional, validate.custom, and nested script fields.",
+        "Check whether any debug logging statement using console.log exists.",
+        "If console.log appears inside a component whose label is exactly \"ADMIN_Sys Attachment Auth\", do not mark it as failed for this check.",
+        "If console.log appears outside the component whose label is exactly \"ADMIN_Sys Attachment Auth\", mark this check as FAILED.",
+        "When failing, report the component label and the line number in the JSON where console.log appears.",
+        "If the same component contains multiple console.log statements, report all relevant line numbers or the first line number with a note that multiple debug logs exist.",
+        "Mark this check as PASSED only if no forbidden console.log statement is found in any Form.io logic or script.",
+        "Mark this check as FAILED if any forbidden console.log statement is found."
+      ],
+      "skill": []
+    }
+  }
+}

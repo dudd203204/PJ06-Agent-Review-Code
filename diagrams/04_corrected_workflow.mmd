@@ -1,0 +1,37 @@
+graph TD
+    A["📋 Config & Settings"] --> B["📂 Load Input Files"]
+    B --> C{"🔀 Route Detection"}
+    C -->|formio_*.json| D["🛡️ Policy: Route A Plan<br/>Decide which skills to run"]
+    C -->|backoffice_*.json| E["🛡️ Policy: Route B Plan<br/>Decide which skills to run"]
+    
+    D --> D1["⚙️ Execute Skills from Plan<br/>A1, A2, A3, C1-C7, B1-B4, D1-D3"]
+    E --> E1["⚙️ Execute Skills from Plan<br/>B1-B6"]
+    
+    D1 --> F["📝 Build Prompts for Each Skill<br/>+ Skill Definition<br/>+ Input Data<br/>+ Procedure Steps"]
+    E1 --> F
+    
+    F --> G["🤖 Invoke LLM<br/>OpenAI or AI Farm"]
+    
+    G --> H["✅ Process Response<br/>Parse + Validate + Fill"]
+    
+    H --> O["✨ Create Output"]
+    O --> P["📊 JSON Report<br/>All Check Results<br/>+ Violations Found"]
+    O --> Q["📊 Excel Export<br/>Summary + Details"]
+    
+    P --> R["✅ Done"]
+    Q --> R
+    
+    style A fill:#90EE90,stroke:#333,stroke-width:2px
+    style B fill:#90EE90,stroke:#333,stroke-width:2px
+    style D fill:#DDA0DD,stroke:#333,stroke-width:2px
+    style E fill:#DDA0DD,stroke:#333,stroke-width:2px
+    style D1 fill:#87CEEB,stroke:#333,stroke-width:2px
+    style E1 fill:#87CEEB,stroke:#333,stroke-width:2px
+    style F fill:#FFE4B5,stroke:#333,stroke-width:2px
+    style G fill:#FF69B4,stroke:#333,stroke-width:2px
+    style H fill:#FFD700,stroke:#333,stroke-width:2px
+
+    style O fill:#90EE90,stroke:#333,stroke-width:2px
+    style P fill:#B0E0E6
+    style Q fill:#B0E0E6
+    style R fill:#90EE90,stroke:#333,stroke-width:3px

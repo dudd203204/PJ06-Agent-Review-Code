@@ -1,0 +1,76 @@
+graph TD
+    A["📋 Config & Settings"] --> B["📂 Load Input Files"]
+    B --> C{"🔀 Route Detection"}
+    C -->|formio_*.json| D["📝 Formio Route"]
+    C -->|backoffice_*.json| E["📝 Backoffice Route"]
+    
+    D --> D1["⚙️ Execute 4 Skills"]
+    D1 --> D1A["✅ A1: Component Keys<br/>CamelCase Check"]
+    D1 --> D1B["✅ A2: Auto-generated<br/>Numeric Suffix"]
+    D1 --> D1C["✅ A3: Admin Panel<br/>Prefix Check"]
+    D1 --> D1D["✅ C1-C7: Form Structure<br/>Validation"]
+    D1 --> D1E["✅ B1-B4: Field Logic<br/>Runtime Check"]
+    D1 --> D1F["✅ D1-D3: Runtime<br/>Quality Check"]
+    
+    E --> E1["⚙️ Execute 1 Skill"]
+    E1 --> E1A["✅ B1-B6: BackOffice<br/>Field Validation"]
+    
+    D1A --> F["📝 Build Prompts<br/>+ Skill Definition<br/>+ Input Data<br/>+ Procedure Steps"]
+    D1B --> F
+    D1C --> F
+    D1D --> F
+    D1E --> F
+    D1F --> F
+    E1A --> F
+    
+    F --> G["🤖 Invoke LLM<br/>OpenAI or AI Farm"]
+    
+    G --> H{"📊 Response Format?"}
+    H -->|Valid JSON| I["✓ Parse JSON"]
+    H -->|JSON List| J["🔄 Convert List<br/>to Object Format"]
+    H -->|Empty/Timeout| K["⚠️ Empty Response<br/>Fill with FAILED"]
+    H -->|Malformed| L["🔨 Repair JSON<br/>Regex Extract"]
+    
+    I --> M["✅ Validate Payload<br/>Check all fields exist<br/>Fill missing = FAILED"]
+    J --> M
+    K --> M
+    L --> M
+    
+    M --> N["🛡️ Policy Engine<br/>ABAC Rules<br/>+ Identity Check<br/>+ Resource Access<br/>+ Action Rules"]
+    
+    N --> O["📋 Response Format Check<br/>All checks present?<br/>Status + Feedback fields?"]
+    
+    O --> P["✨ Create Output"]
+    P --> Q["📊 JSON Report<br/>+ All Check Results<br/>+ Violations Found"]
+    P --> R["📊 Excel Export<br/>+ Summary Sheet<br/>+ Detailed Results"]
+    
+    Q --> S["✅ Done"]
+    R --> S
+    
+    style A fill:#90EE90,stroke:#333,stroke-width:2px
+    style B fill:#90EE90,stroke:#333,stroke-width:2px
+    style D fill:#FFB347,stroke:#333,stroke-width:2px
+    style E fill:#FFB347,stroke:#333,stroke-width:2px
+    style D1 fill:#87CEEB,stroke:#333,stroke-width:2px
+    style E1 fill:#87CEEB,stroke:#333,stroke-width:2px
+    style D1A fill:#DDA0DD
+    style D1B fill:#DDA0DD
+    style D1C fill:#DDA0DD
+    style D1D fill:#FF69B4
+    style D1E fill:#FF69B4
+    style D1F fill:#FF69B4
+    style E1A fill:#DDA0DD
+    style F fill:#FFE4B5,stroke:#333,stroke-width:2px
+    style G fill:#FF69B4,stroke:#333,stroke-width:2px
+    style H fill:#FFD700,stroke:#333,stroke-width:2px
+    style I fill:#87CEEB
+    style J fill:#87CEEB
+    style K fill:#FFB6C1
+    style L fill:#FFB6C1
+    style M fill:#87CEEB,stroke:#333,stroke-width:2px
+    style N fill:#DDA0DD,stroke:#333,stroke-width:2px
+    style O fill:#87CEEB,stroke:#333,stroke-width:2px
+    style P fill:#90EE90,stroke:#333,stroke-width:2px
+    style Q fill:#B0E0E6
+    style R fill:#B0E0E6
+    style S fill:#90EE90,stroke:#333,stroke-width:3px

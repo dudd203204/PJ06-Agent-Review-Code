@@ -1,0 +1,202 @@
+{
+  "category": "Field Logic",
+  "description": "This skill group explains how to review Form.io JSON files for unsafe logic execution, missing null/undefined handling, unbounded calculated text output, unsafe required validation on conditionally visible fields, and missing clear-value behavior for approver-edit fields during withdraw or revision flows.",
+  "goal": "Review a Form.io JSON file and determine PASSED or FAILED for each check, with exact failure locations, reasons, and safer recommendations when a rule is violated.",
+  "output_style": {
+    "type": "structured_review",
+    "rules": [
+      "Review each check independently.",
+      "For every check, return PASSED or FAILED.",
+      "Do not assume a pass when evidence is missing.",
+      "If one item breaks the rule, that check must be FAILED.",
+      "If failed, clearly point out the exact component or logic location that caused the failure.",
+      "When applicable, provide a safer recommended rewrite or configuration suggestion."
+    ],
+    "format": {
+      "B1": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the component label, unsafe logic location, why it is unsafe, and a safer recommended rewrite."
+      },
+      "B2": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the component label, why the calculated text output is unsafe or unbounded, and a safer truncation suggestion."
+      },
+      "B3": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the approver-edit component label, the withdraw or revision dependency, why the value is not safely cleared, and a safer clear-value suggestion."
+      },
+      "B4": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the conditionally visible component label and explain why static required validation is unsafe."
+      }
+    }
+  },
+  "procedure": [
+    "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+    "Traverse all components recursively, including nested child components inside panels, containers, columns, fieldsets, tabs, datagrids, editgrids, and other wrappers.",
+    "Inspect component-level configuration and all executable or dependency-based logic fields.",
+    "Apply each skill check independently.",
+    "Collect evidence for pass/fail decisions.",
+    "Return PASSED or FAILED for each skill with exact failure locations when applicable."
+  ],
+  "skill": {
+    "B1": {
+      "review_item": "Check on access undefined, null value, field dependencies,",
+      "description": "Review whether all executable logic and dependency-based expressions safely handle undefined, null, and missing field dependencies without causing JavaScript runtime errors.",
+      "goal": "Make sure Form.io logic blocks do not cause JavaScript runtime errors such as 'Cannot read properties of undefined' or 'Cannot read properties of null' when dependent fields are null, undefined, or missing.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the component label, line number, unsafe logic location, why it fails, and a safer recommended rewrite using proper null/undefined handling.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Customer Name\" (line 0156) -> calculateValue uses data.customer.name.trim(). This is unsafe because data.customer or data.customer.name may be undefined, causing 'Cannot read properties of undefined'. Safer rewrite: value = (data.customer?.name || '').trim();"
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse the full Form.io JSON recursively.",
+        "Inspect all locations that may contain executable logic or JavaScript expressions, including but not limited to: logic, calculateValue, customConditional, conditional, validate.custom, customDefaultValue, defaultValue expressions, calculatedValue, and any other Form.io properties that contain expressions, custom scripts, or dependency-based logic.",
+        "For each detected logic block, identify all accessed dependency fields, especially fields accessed through data, row, component, instance, input, value, or parent objects.",
+        "Detect risky nested property access patterns: data.a.b.c, row.a.b, input.value.name, or any chained object access without protection.",
+        "Detect risky method calls: .trim(), .map(), .filter(), .forEach(), .toLowerCase(), .toUpperCase(), .length, .split(), .replace(), .includes(), or numeric/date methods called on values that may be null or undefined.",
+        "Detect unsafe array operations: array methods without checking Array.isArray first when the source may not be an array.",
+        "Detect unsafe comparisons, calculations, string concatenations, or date operations on dependent fields that may be missing.",
+        "Detect unsafe JSON.parse without try/catch or input validation.",
+        "Accept safe patterns: optional chaining (?.), nullish coalescing (??), logical OR fallback (||), explicit if checks, typeof checks, Array.isArray checks, try/catch for risky parsing, and guarded method calls.",
+        "Mark this check as PASSED only if all detected logic blocks safely handle null, undefined, and missing field dependencies.",
+        "Mark this check as FAILED if any logic block may cause a JavaScript runtime error such as 'Cannot read properties of undefined' or 'Cannot read properties of null'."
+      ],
+      "skill": []
+    },
+    "B2": {
+      "review_item": "Truncate on ANY CALCULATED VALUE FIELD (text concatenate)",
+      "description": "Review whether calculated value fields that generate text through concatenation explicitly truncate or limit generated text output to prevent unbounded output.",
+      "goal": "Make sure any calculated value that generates text by concatenating multiple values, separators, labels, or display text parts has a safe maximum length or truncation mechanism.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the component label, line number, why it fails, and a safer truncation suggestion using JavaScript length-control patterns.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Display Name\" (line 0156) -> calculatedValue concatenates data.firstName + ' ' + data.lastName without truncation. This can produce unbounded text output. Safer suggestion: value = `${data.firstName || ''} ${data.lastName || ''}`.trim().slice(0, 120);"
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Find all components that contain calculatedValue or similar calculated text-generation fields.",
+        "Apply this check ONLY to calculated value expressions that generate TEXT OUTPUT by concatenating multiple values, separators, spaces, labels, or display text parts into one string.",
+        "Identify text concatenation patterns: use of + operator with strings, template literals, array.join() for display text, or combining multiple data fields into one string.",
+        "Do NOT apply this rule to calculated values that are purely numeric, boolean, date-related, or otherwise not generating concatenated text output.",
+        "For each calculated text-concatenation field, check whether the final output is explicitly truncated or limited to a safe maximum length.",
+        "Accept valid JavaScript length-control patterns: .slice(...), .substring(...), .substr(...), checking .length before returning, or using a helper function that clearly truncates the output.",
+        "If the project defines a specific maximum length, verify that maximum is applied.",
+        "If no project maximum length is defined, only check whether a clear truncation or length-limiting mechanism exists.",
+        "Mark this check as PASSED only if all calculated text-concatenation fields have explicit length limiting or truncation.",
+        "Mark this check as FAILED if any calculated text-concatenation field can produce unbounded text output without truncation or length control."
+      ],
+      "skill": []
+    },
+    "B3": {
+      "review_item": "Clear value for approver edit components when withdraw, revision",
+      "description": "Review whether approver-edit components are cleared when the workflow is withdrawn or sent back for revision.",
+      "goal": "Make sure values entered or edited by approvers do not remain stale when the form enters withdraw or revision states.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the approver-edit component label, the withdraw or revision state dependency, why the value is not safely cleared, and a safer clear-value suggestion.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Approver Comment\" appears to be an approver-edit field but has no logic to clear its value when workflowStatus is \"withdraw\" or \"revision\". This may keep stale approval data. Safer suggestion: add Form.io logic that sets value = null or value = '' when data.workflowStatus is withdraw or revision."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Identify components that appear to be approver-edit fields based on labels, keys, custom properties, panel grouping, workflow naming, or edit permissions. Examples include labels or keys containing approver, approval, reviewer, review, approverComment, approvalDecision, approvalStatus, approvedBy, or similar business meanings.",
+        "Inspect logic, calculateValue, customConditional, conditional, clearOnHide, resetValue, properties, custom validation, or other behavior that controls value clearing.",
+        "Check whether the component value is explicitly cleared when the workflow enters withdraw, withdrawn, revision, revise, returned, send back, rejected for revision, or equivalent states.",
+        "Accept safe clear-value behavior such as setting the value to null, empty string, empty array, or another clearly intentional reset value when the withdraw or revision condition is met.",
+        "Accept clearOnHide only if the component is hidden during withdraw or revision and clearOnHide is enabled or equivalent behavior is clearly configured.",
+        "Mark this check as PASSED only if all detected approver-edit components are safely cleared or reset during withdraw or revision flows.",
+        "Mark this check as FAILED if any approver-edit component may retain stale values after withdraw or revision.",
+        "If no approver-edit components are found, mark this check as PASSED unless project rules state that approver-edit components are mandatory."
+      ],
+      "skill": []
+    },
+    "B4": {
+      "review_item": "If component is conditional show/hide and it is require -> make it optional and use Logic to enable mandatory validation",
+      "description": "SCOPE: Check ONLY components with type='panel' that have conditional/customConditional. Columns, containers, and other wrapper types are NOT panels for this check. For each conditional panel, verify child components (in the panel's 'components' array) with required validation have EXPLICIT conditional matching parent AND validateWhenHidden = true. Children without explicit conditional cannot safely validate (cascading hide makes validateWhenHidden meaningless). Parent-child determined by JSON structure, NOT by file position.",
+      "goal": "Ensure child components in conditional panels (type='panel') with required validation MUST have explicit conditional matching parent AND validateWhenHidden = true. Children without explicit conditional are hidden via cascading parent hide, making user unable to input data but still required - this is unsafe. Only explicit matching conditional + validateWhenHidden = true is safe.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "Report FAILED if: (1) Child in conditional panel's components array has required = true, (2) Child lacks conditional/customConditional property, OR (3) Child has conditional but not encompassing parent's condition OR missing validateWhenHidden = true. validateWhenHidden = true alone without explicit conditional is NOT safe (user cannot input due to cascading parent hide).",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Parent panel 'Approval Section' (line 0088) has conditional when summary='a'. Child 'SAP Plant' (line 0107) has validate.required = true but LACKS conditional property. When parent hides, child is hidden via cascading - user cannot input data but component is still required. Fix: add explicit conditional matching parent + validateWhenHidden = true"
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "",
+        "CRITICAL: This check ONLY applies to components where type = 'panel' AND component has conditional or customConditional.",
+        "",
+        "TYPE EXAMPLES:",
+        "  ✓ type = 'panel' → CHECK IF HAS CONDITIONAL",
+        "  ✗ type = 'columns' → DO NOT CHECK (columns wrapper type, not a panel)",
+        "  ✗ type = 'container' → DO NOT CHECK (not a panel)",
+        "  ✗ type = 'fieldset' → DO NOT CHECK (not a panel)",
+        "  ✗ type = 'tabs' → DO NOT CHECK (not a panel)",
+        "",
+        "PARENT-CHILD DEFINITION: A child component exists in the 'components' array directly inside a panel object (type='panel').",
+        "When you find a component where type='panel' AND it has conditional, look for components array inside that specific panel object.",
+        "",
+        "INITIAL FILTER: Scan for: (1) component where type = 'panel', (2) AND that component has conditional or customConditional property.",
+        "If NO such panels found → mark as PASSED",
+        "If FOUND → continue to analysis",
+        "",
+        "ANALYSIS - For EACH panel (type='panel' with conditional/customConditional):",
+        "",
+        "STEP 1: Extract panel's conditional logic",
+        "",
+        "STEP 2: Look ONLY at the 'components' array inside THIS SPECIFIC panel",
+        "Only components directly in this panel's components array are children",
+        "Components inside columns, containers, or other wrappers inside the panel are also checked recursively",
+        "",
+        "STEP 3: For each child with validate.required = true",
+        "Check REQUIRED: Child MUST have conditional OR customConditional property",
+        "If child has NO conditional/customConditional → FAIL because:",
+        "  - When parent panel is hidden, child is hidden but not directly (cascading hide)",
+        "  - User cannot input data (parent already hiding it)",
+        "  - validateWhenHidden = true would not help (child is hidden by parent, not by its own condition)",
+        "  - Required validation becomes unsafe and illogical",
+        "",
+        "STEP 4: For children that HAS conditional/customConditional:",
+        "Verify child's condition ENCOMPASSES parent's condition",
+        "Child's logic must satisfy ALL conditions from parent",
+        "Example: If parent = 'subject === a', child MUST include 'subject === a' in its logic",
+        "If child condition does NOT encompass parent → FAIL (logic conflict)",
+        "If child condition DOES encompass parent → continue to STEP 5",
+        "",
+        "STEP 5: Verify validateWhenHidden = true on child",
+        "validateWhenHidden = true means component validates even when hidden by its own conditional",
+        "This is REQUIRED for safe validation when child is hidden by its own condition",
+        "If validateWhenHidden = true → PASS (child has matching conditional + safe validation)",
+        "If validateWhenHidden = false OR not set → FAIL (unsafe)",
+        "",
+        "RESULT: PASSED if no conditional panels found OR all children have (matching conditional + validateWhenHidden=true). FAILED otherwise."
+      ],
+      "skill": []
+    }
+  }
+}

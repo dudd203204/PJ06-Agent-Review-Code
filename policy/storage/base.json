@@ -1,0 +1,39 @@
+{
+  "schema": "policy-schema/v1",
+  "metadata": {
+    "description": "Principal-based policy registry for agent-skill reviewer",
+    "owner": "agent-skill",
+    "tags": [
+      "skills",
+      "policy",
+      "pep",
+      "pdp",
+      "pap"
+    ]
+  },
+  "registered_resources": {
+    "skillsets": [
+      "back_office_quality",
+      "form_quality"
+    ],
+    "skills": [
+      "component_quality",
+      "field_logic_quality",
+      "form_structure_quality",
+      "review_back_office",
+      "run_time_quality"
+    ],
+    "tools": [
+      "get_hyperparameters",
+      "list_project_files",
+      "list_skills",
+      "load_skill",
+      "read_project_file"
+    ],
+    "actions": [
+      "skillset.select",
+      "skill.use",
+      "tool.invoke"
+    ]
+  }
+}

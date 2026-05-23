@@ -1,0 +1,23 @@
+{
+  "model": {
+    "name": "gpt-4o-mini-2024-07-18",
+    "temperature": 0,
+    "timeout": 60,
+    "provider": "openai",
+    "custom_endpoint": null,
+    "custom_subscription_id": null
+  },
+  "runtime": {
+    "max_agent_iterations": 6,
+    "verbose": true
+  },
+  "paths": {
+    "skill_registry": "skills/skill_registry.json",
+    "skill_root": "skills",
+    "policy_root": "policy",
+    "policy_file": "policy/storage/policy.json",
+    "input_root": "input",
+    "proceed_root": "input/proceed",
+    "output_root": "output"
+  }
+}

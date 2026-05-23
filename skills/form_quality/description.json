@@ -1,0 +1,26 @@
+{
+  "skillset": "form_quality",
+  "description": "Skillset form_quality",
+  "skills": [
+    {
+      "skill_name": "component_quality",
+      "description": "This skill group explains how to review component naming quality in a Form.io JSON file. The reviewer must inspect the input JSON, traverse all relevant top-level and nested components, and evaluate each defined check independently.",
+      "skill_file": "skills/form_quality/component_quality.json"
+    },
+    {
+      "skill_name": "field_logic_quality",
+      "description": "This skill group explains how to review Form.io JSON files for unsafe logic execution, missing null/undefined handling, unbounded calculated text output, unsafe required validation on conditionally visible fields, and missing clear-value behavior for approver-edit fields during withdraw or revision flows.",
+      "skill_file": "skills/form_quality/field_logic_quality.json"
+    },
+    {
+      "skill_name": "form_structure_quality",
+      "description": "This skill group explains how to review Form.io JSON files for layout structure, top-level wrapper consistency, attachment authorization requirements, logic implementation simplicity, nesting complexity, reusable utility usage, and required platform summary field availability.",
+      "skill_file": "skills/form_quality/form_structure_quality.json"
+    },
+    {
+      "skill_name": "run_time_quality",
+      "description": "This skill group explains how to review Form.io JSON files for unsafe calculated display values, JavaScript runtime errors or Form.io console warnings, and forbidden debug logging statements inside executable logic.",
+      "skill_file": "skills/form_quality/run_time_quality.json"
+    }
+  ]
+}

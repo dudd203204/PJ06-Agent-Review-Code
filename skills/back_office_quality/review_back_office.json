@@ -1,0 +1,150 @@
+{
+  "category": "Review Back office",
+  "description": "Reviewing Backoffice configuration quality, Form.IO mapping, report activation, and admin-field exposure in a backoffice JSON file.",
+  "goal": "Determine PASSED or FAILED for each Backoffice-related check, with exact failure locations and English-only feedback.",
+  "output_style": {
+    "type": "structured_review",
+    "rules": [
+      "Return PASSED or FAILED for each skill.",
+      "Review each check independently.",
+      "Only use evidence available in the input JSON.",
+      "If a check is not applicable because the input JSON explicitly says the related feature is not used, return PASSED and explain the not-applicable reason in Note / Feedback.",
+      "If failed, provide the exact field path, offending value, and reason in English."
+    ],
+    "format": {
+      "B1": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, identify the exact form.form_url path and the invalid or missing value."
+      },
+      "B2": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, identify the exact priority, rule block, or configuration location where Segment Rule is not prioritized over System Action."
+      },
+      "B3": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, identify whether excel_configs is missing, excel_configs.is_active is missing, or excel_configs.is_active is false. If not applicable, explain the explicit JSON evidence."
+      },
+      "B4": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, identify the exact excel_configs.excel_fields array position and value that starts with ADMIN_."
+      },
+      "B5": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, identify whether uib_configs is missing, uib_configs.is_active is missing, or uib_configs.is_active is false. If not applicable, explain the explicit JSON evidence."
+      },
+      "B6": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, identify the exact uib_configs.uib_fields array position and value that starts with ADMIN_."
+      }
+    }
+  },
+  "procedure": [
+    "Open the input backoffice JSON file.",
+    "Traverse all top-level and nested objects needed by each check.",
+    "Execute each skill independently.",
+    "Only use evidence available in the JSON.",
+    "Do not assume external SRS content unless it is explicitly embedded in the input JSON.",
+    "Aggregate the pass/fail results using the exact keys declared in output_style.format."
+  ],
+  "skill": [
+    {
+      "id": "B1",
+      "review_item": "Back office must map correctly with Form.IO stage/URL\nT -> Non-Prod stage Development\nQ -> Non-Prod stage PreProd\nP -> Prod stage Live",
+      "description": "Check whether the backoffice form maps correctly with the expected Form.IO staging URL.",
+      "goal": "Make sure form.form_url exists and starts with https://formio-staging/d-.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact form.form_url path and the invalid or missing value.",
+      "procedure": [
+        "Locate the top-level form object.",
+        "Check whether form.form_url exists.",
+        "Fail if form.form_url is missing.",
+        "If form.form_url exists, inspect its value.",
+        "Pass only when the value starts with https://formio-staging/d-.",
+        "Fail when the value uses another stage, another prefix, http instead of https, or any non-matching URL."
+      ],
+      "skill": []
+    },
+    {
+      "id": "B2",
+      "review_item": "Priority on Segment Rule: Segment Rule > System Action.",
+      "description": "Check whether Segment Rule takes precedence over System Action.",
+      "goal": "Make sure Segment Rule is prioritized over System Action wherever both are defined or can be applied.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact priority field, rule block, or configuration location where the order is missing, unclear, or incorrect.",
+      "procedure": [
+        "Traverse configuration areas related to rule execution, evaluation order, workflow rules, action priority, segment rules, and system actions.",
+        "Identify whether Segment Rule and System Action are defined, referenced, or both present in the same logical flow.",
+        "Check whether the configuration explicitly shows that Segment Rule takes precedence over System Action.",
+        "Pass only when the priority is explicitly defined as Segment Rule before System Action.",
+        "Fail if the priority is missing, unclear, or shows System Action before Segment Rule."
+      ],
+      "skill": []
+    },
+    {
+      "id": "B3",
+      "review_item": "Active Excel Report Config (unless SRS say this app will not use excel report)",
+      "description": "Check whether Excel Report Config is active.",
+      "goal": "Make sure excel_configs exists and excel_configs.is_active is true unless the input JSON explicitly states that Excel report is not used.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact field path and whether the object is missing, the field is missing, or the value is false. If not applicable due to explicit JSON evidence, return PASSED and explain why.",
+      "procedure": [
+        "Inspect the input JSON for explicit evidence that the application will not use Excel report.",
+        "If the JSON explicitly says Excel report is not used, mark this check as PASSED and explain that the check is not applicable.",
+        "Otherwise, locate the top-level excel_configs object.",
+        "Check whether excel_configs exists.",
+        "Check whether excel_configs.is_active exists.",
+        "Check whether excel_configs.is_active is set to true.",
+        "Pass only when all required conditions are satisfied.",
+        "Fail if excel_configs is missing, excel_configs.is_active is missing, or excel_configs.is_active is false."
+      ],
+      "skill": []
+    },
+    {
+      "id": "B4",
+      "review_item": "Admin field should be remove from excel report",
+      "description": "Check whether admin fields have been removed from the Excel report.",
+      "goal": "Make sure no field in excel_configs.excel_fields uses a value starting with ADMIN_.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact excel_configs.excel_fields array position and invalid value.",
+      "procedure": [
+        "Locate excel_configs.excel_fields.",
+        "Inspect each object inside the excel_fields array.",
+        "For each object, read the value field when present.",
+        "Ignore objects that do not have a value field unless the JSON structure clearly treats the object as an Excel field mapping.",
+        "Fail if any value starts with ADMIN_.",
+        "Pass if no value in excel_configs.excel_fields starts with ADMIN_."
+      ],
+      "skill": []
+    },
+    {
+      "id": "B5",
+      "review_item": "Active UIB Config (unless SRS say this app will not use UIB)",
+      "description": "Check whether UIB Config is active.",
+      "goal": "Make sure uib_configs exists and uib_configs.is_active is true unless the input JSON explicitly states that UIB or the related report configuration is not used.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact field path and whether the object is missing, the field is missing, or the value is false. If not applicable due to explicit JSON evidence, return PASSED and explain why.",
+      "procedure": [
+        "Inspect the input JSON for explicit evidence that UIB or the related report configuration is not used.",
+        "If the JSON explicitly says this configuration is not used, mark this check as PASSED and explain that the check is not applicable.",
+        "Otherwise, locate the top-level uib_configs object.",
+        "Check whether uib_configs exists.",
+        "Check whether uib_configs.is_active exists.",
+        "Check whether uib_configs.is_active is set to true.",
+        "Pass only when all required conditions are satisfied.",
+        "Fail if uib_configs is missing, uib_configs.is_active is missing, or uib_configs.is_active is false."
+      ],
+      "skill": []
+    },
+    {
+      "id": "B6",
+      "review_item": "Admin field should be remove from UIB",
+      "description": "Check whether admin fields have been removed from UIB.",
+      "goal": "Make sure no field in uib_configs.uib_fields uses a value starting with ADMIN_.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact uib_configs.uib_fields array position and invalid value.",
+      "procedure": [
+        "Locate uib_configs.uib_fields.",
+        "Inspect each object inside the uib_fields array.",
+        "For each object, read the value field when present.",
+        "Ignore objects that do not have a value field unless the JSON structure clearly treats the object as a UIB field mapping.",
+        "Fail if any value starts with ADMIN_.",
+        "Pass if no value in uib_configs.uib_fields starts with ADMIN_."
+      ],
+      "skill": []
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "skillset": "back_office_quality",
+  "description": "Skillset back_office_quality",
+  "skills": [
+    {
+      "skill_name": "review_back_office",
+      "description": "Reviewing Backoffice configuration quality, Form.IO mapping, report activation, and admin-field exposure in a backoffice JSON file.",
+      "skill_file": "skills/back_office_quality/review_back_office.json"
+    }
+  ]
+}

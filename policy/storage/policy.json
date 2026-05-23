@@ -1,0 +1,124 @@
+{
+  "pap": {
+    "skillsets": [
+      {
+        "name": "form_quality",
+        "skills": [
+          {
+            "name": "component_quality",
+            "description": "Review component naming quality in a Form.io JSON file.",
+            "skill_file": "skills/form_quality/component_quality.json",
+            "skillset": "form_quality"
+          },
+          {
+            "name": "field_logic_quality",
+            "description": "This skill group explains how to review Form.io JSON files for unsafe logic execution, missing null/undefined handling, unbounded calculated text output, unsafe required validation on conditionally visible fields, and missing clear-value behavior for approver-edit fields during withdraw or revision flows.",
+            "skill_file": "skills/form_quality/field_logic_quality.json",
+            "skillset": "form_quality"
+          },
+          {
+            "name": "form_structure_quality",
+            "description": "This skill group explains how to review Form.io JSON files for layout structure, top-level wrapper consistency, attachment authorization requirements, logic implementation simplicity, nesting complexity, reusable utility usage, and required platform summary field availability.",
+            "skill_file": "skills/form_quality/form_structure_quality.json",
+            "skillset": "form_quality"
+          },
+          {
+            "name": "run_time_quality",
+            "description": "This skill group explains how to review Form.io JSON files for unsafe calculated display values, JavaScript runtime errors or Form.io console warnings, and forbidden debug logging statements inside executable logic.",
+            "skill_file": "skills/form_quality/run_time_quality.json",
+            "skillset": "form_quality"
+          }
+        ]
+      },
+      {
+        "name": "back_office_quality",
+        "skills": [
+          {
+            "name": "review_back_office",
+            "description": "Reviewing Backoffice configuration quality, Form.IO mapping, report activation, and admin-field exposure in a backoffice JSON file.",
+            "skill_file": "skills/back_office_quality/review_back_office.json",
+            "skillset": "back_office_quality"
+          }
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "name": "review_back_office",
+        "description": "Reviewing Backoffice configuration quality, Form.IO mapping, report activation, and admin-field exposure in a backoffice JSON file.",
+        "skill_file": "skills/back_office_quality/review_back_office.json",
+        "skillset": "back_office_quality"
+      },
+      {
+        "name": "component_quality",
+        "description": "Review component naming quality in a Form.io JSON file.",
+        "skill_file": "skills/form_quality/component_quality.json",
+        "skillset": "form_quality"
+      },
+      {
+        "name": "field_logic_quality",
+        "description": "This skill group explains how to review Form.io JSON files for unsafe logic execution, missing null/undefined handling, unbounded calculated text output, unsafe required validation on conditionally visible fields, and missing clear-value behavior for approver-edit fields during withdraw or revision flows.",
+        "skill_file": "skills/form_quality/field_logic_quality.json",
+        "skillset": "form_quality"
+      },
+      {
+        "name": "form_structure_quality",
+        "description": "This skill group explains how to review Form.io JSON files for layout structure, top-level wrapper consistency, attachment authorization requirements, logic implementation simplicity, nesting complexity, reusable utility usage, and required platform summary field availability.",
+        "skill_file": "skills/form_quality/form_structure_quality.json",
+        "skillset": "form_quality"
+      },
+      {
+        "name": "run_time_quality",
+        "description": "This skill group explains how to review Form.io JSON files for unsafe calculated display values, JavaScript runtime errors or Form.io console warnings, and forbidden debug logging statements inside executable logic.",
+        "skill_file": "skills/form_quality/run_time_quality.json",
+        "skillset": "form_quality"
+      }
+    ],
+    "tools": [
+      "get_hyperparameters",
+      "list_project_files",
+      "list_skills",
+      "load_skill",
+      "read_project_file"
+    ]
+  },
+  "pdp": {
+    "selection": {
+      "mode": "skillset",
+      "skillset": "form_quality",
+      "skill_file": ""
+    },
+    "routes": {
+      "route_a": {
+        "name": "FormIO",
+        "skillset": "form_quality",
+        "skills": [
+          "component_quality",
+          "form_structure_quality",
+          "field_logic_quality",
+          "run_time_quality"
+        ]
+      },
+      "route_b": {
+        "name": "Backoffice",
+        "skillset": "back_office_quality",
+        "skills": [
+          "review_back_office"
+        ]
+      }
+    }
+  },
+  "pep": {
+    "allow_skillset_selection": true,
+    "allow_skill_file_selection": true,
+    "allowed_skillsets": [
+      "*"
+    ],
+    "allowed_skill_files": [
+      "*"
+    ],
+    "allowed_tools": [
+      "*"
+    ]
+  }
+}

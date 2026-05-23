@@ -1,0 +1,282 @@
+{
+  "category": "Form structure",
+  "description": "This skill group explains how to review Form.io JSON files for layout structure, top-level wrapper consistency, attachment authorization requirements, logic implementation simplicity, nesting complexity, reusable utility usage, and required platform summary field availability.",
+  "goal": "Review a Form.io JSON file and determine PASSED or FAILED for each check, with exact failure locations, reasons, and recommendations when a rule is violated.",
+  "output_style": {
+    "type": "structured_review",
+    "rules": [
+      "Review each check independently.",
+      "For every check, return PASSED or FAILED.",
+      "Do not assume a pass when evidence is missing.",
+      "If one item breaks the rule, that check must be FAILED.",
+      "If failed, clearly point out the exact component, column, wrapper, or location that caused the failure.",
+      "When the rule is advisory or best-practice based, explain the issue and provide a simpler or safer recommendation."
+    ],
+    "format": {
+      "C1": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the columns component location, column position or index, and why the column contains too many direct child components."
+      },
+      "C2": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, explain whether the form is missing the outermost wrapper with key = \"main\" or has top-level components outside the main wrapper."
+      },
+      "C3": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, explain that the form uses an attachment component but does not contain \"ADMIN_Sys Attachment Auth\" inside the \"Admin\" panel."
+      },
+      "C4": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the component or logic location and explain why a simpler implementation approach should be used."
+      },
+      "C5": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the deeply nested component path and explain why the multi-level structure is too complex."
+      },
+      "C6": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the repeated logic or repeated component-processing pattern and recommend using utility functions."
+      },
+      "C7": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, explain that the form does not contain a component with key = \"summary\" for core platform request summary capture."
+      }
+    }
+  },
+  "procedure": [
+    "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+    "Traverse all components recursively, including nested child components inside panels, containers, columns, fieldsets, tabs, datagrids, editgrids, and other wrappers.",
+    "Inspect the top-level form structure, layout components, attachment components, Admin panel contents, executable logic fields, calculated fields, conditional configurations, nesting depth, repeated scripts, and required platform fields.",
+    "Apply each skill check independently.",
+    "Collect evidence for pass/fail decisions.",
+    "Return PASSED or FAILED for each skill with exact failure locations and explanations when applicable."
+  ],
+  "skill": {
+    "C1": {
+      "review_item": "Separate columns component for each row",
+      "description": "Review whether each Form.io columns component uses each column as a single-component layout slot.",
+      "goal": "Make sure every column inside every columns component contains no more than one direct child component.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the column position or index, the location of the columns component, and why it fails.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Columns component at top-level component [2] -> column [1] contains 3 direct child components. This fails because each column in the same layout row must contain no more than 1 direct child component."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Find every component whose type is exactly \"columns\".",
+        "Treat each columns component as one layout row.",
+        "For each columns component, inspect every column inside its \"columns\" array.",
+        "For each column, inspect the direct \"components\" array of that column.",
+        "Check whether each column contains no more than 1 direct child component.",
+        "Do not count nested children inside the direct child component for this rule.",
+        "Do not allow multiple direct child components inside the same column of the same columns row.",
+        "If additional fields are needed, they should be placed in additional columns or moved into another columns component instead of stacking multiple components inside one column.",
+        "Mark this check as PASSED only if every column in every columns component contains at most 1 direct child component.",
+        "Mark this check as FAILED if any column contains more than 1 direct child component."
+      ],
+      "skill": []
+    },
+    "C2": {
+      "review_item": "Always add a main wrapper at the outermost level of the form: Ease deployment, Handle whole form JSON",
+      "description": "Review whether the form's root object (the outermost wrapper) has ALL THREE required attributes set to exact values. The form's root object MUST have: (1) key property exactly equal to \"main\", (2) type property exactly equal to \"well\", and (3) customClass property exactly equal to \"main-wrapper\". If ANY of these three is missing, null, or has a different value, the form violates this requirement.",
+      "goal": "Ensure the Form.io form's root object has ALL THREE exact attributes: key=\"main\", type=\"well\", customClass=\"main-wrapper\". ANY missing attribute, null value, or incorrect value means FAILED. This requirement is MANDATORY - do not pass if any of the three is absent or incorrect.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If ANY of the three required attributes is missing, null, or incorrect, return status FAILED and specify which attribute(s) failed and their actual values. Do not mark PASSED unless ALL THREE attributes are confirmed to have the exact required values.",
+        "example": {
+          "passed": {
+            "Status": "PASSED",
+            "Note / Feedback": "The form object root has all three required attributes: key = \"main\", type = \"well\", customClass = \"main-wrapper\"."
+          },
+          "failed_missing_customclass": {
+            "Status": "FAILED",
+            "Note / Feedback": "FAILED: The form object root is missing the required customClass attribute (currently null or absent). Required: customClass = \"main-wrapper\". The root object has key = \"main\" and type = \"well\", but customClass is null. This is a MANDATORY requirement."
+          },
+          "failed_wrong_type": {
+            "Status": "FAILED",
+            "Note / Feedback": "FAILED: The form object root has incorrect type. Current: type = \"panel\", Required: type = \"well\". The root object must use type='well' and have key='main' and customClass='main-wrapper'."
+          },
+          "failed_wrong_key": {
+            "Status": "FAILED",
+            "Note / Feedback": "FAILED: The form object root has incorrect key. Current: key = \"wrapper\", Required: key = \"main\". The root object must have key='main' and type='well' and customClass='main-wrapper'."
+          }
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Locate the root-level form object at the very beginning of the numbered source (typically lines 0001-0010).",
+        "The root object shows properties in this order: \"label\", \"key\", \"type\", \"input\", \"tableView\", then \"components\" array.",
+        "**CRITICAL**: In the numbered source, look for \"customClass\" property within the root object (should appear before \"components\").",
+        "If \"customClass\" is NOT VISIBLE in the numbered source at lines 0001-0010 → customClass is missing or null → MUST FAIL.",
+        "If \"customClass\" IS visible in the numbered source, verify its value matches EXACTLY \"main-wrapper\".",
+        "Also check at root level:",
+        "  - Line with \"key\": must be EXACTLY \"main\"",
+        "  - Line with \"type\": must be EXACTLY \"well\"",
+        "Mark this check as PASSED ONLY if ALL THREE conditions are true:",
+        "  1. Root \"key\" is EXACTLY \"main\" (visible in numbered source around line 0003)",
+        "  2. Root \"type\" is EXACTLY \"well\" (visible in numbered source around line 0004)",
+        "  3. Root \"customClass\" is visible and EXACTLY \"main-wrapper\" (should appear around line 0005-0006, if missing → FAIL)",
+        "Mark this check as FAILED if:",
+        "  - \"customClass\" is not visible/present in the numbered source, OR",
+        "  - Any of the three properties has a different value.",
+        "When reporting FAILED, explicitly reference the line numbers from the numbered source and state which properties are missing/incorrect."
+      ],
+      "skill": []
+    },
+    "C3": {
+      "review_item": "Sys Attachment Auth: Must have on Attachment Component, Need to use on FormIO",
+      "description": "Review whether forms using attachment components include the required system attachment authorization component inside the Admin panel.",
+      "goal": "Make sure any Form.io form that uses an attachment component also contains \"ADMIN_Sys Attachment Auth\" inside the panel labeled \"Admin\".",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, return status FAILED and explain that an attachment component exists but the required Admin authorization component is missing.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "The form contains a file attachment component, but no component with label = \"ADMIN_Sys Attachment Auth\" was found inside the \"Admin\" panel."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Detect whether the form contains any attachment component.",
+        "Treat components with type = \"file\" as attachment components.",
+        "If no attachment component exists, mark this check as PASSED unless project rules state that attachment authorization is always mandatory.",
+        "If an attachment component exists, find every panel whose label is exactly \"Admin\".",
+        "If an attachment component exists but no panel labeled \"Admin\" exists, mark this check as FAILED.",
+        "Inside each \"Admin\" panel, recursively inspect all nested child components.",
+        "Verify whether the \"Admin\" panel contains a component whose label is exactly \"ADMIN_Sys Attachment Auth\".",
+        "Mark this check as PASSED only if the form uses an attachment component and the required \"ADMIN_Sys Attachment Auth\" component exists correctly inside the \"Admin\" panel.",
+        "Mark this check as FAILED if the form uses an attachment component but no \"ADMIN_Sys Attachment Auth\" component is found inside the \"Admin\" panel."
+      ],
+      "skill": []
+    },
+    "C4": {
+      "review_item": "Prefer the simplest approach when implementing logic.If the same requirement can be achieved in multiple ways, choose the simplest solution following this priority order (from simplest to most advanced): Custom Default > Calculated > Conditional > Logic",
+      "description": "Review whether logic implementation uses the simplest suitable Form.io mechanism.",
+      "goal": "Make sure form behavior is implemented using the simplest valid approach, following the priority order: Custom Default > Calculated > Conditional > Logic.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the component or logic location, explain why the implementation is more complex than needed, and recommend the simpler Form.io feature that should be used.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component label = \"Request Type\" uses a Logic block only to set an initial default value. This is more complex than needed. Prefer Custom Default for default value initialization."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Inspect all places where behavior is implemented, including customDefaultValue, calculateValue, calculatedValue, conditional, customConditional, logic, validate.custom, and other script-based fields.",
+        "For each behavior, identify the actual requirement being implemented, such as default value assignment, calculated value generation, show/hide condition, validation, or advanced dynamic behavior.",
+        "Apply the simplicity priority order from simplest to most advanced: Custom Default, then Calculated, then Conditional, then Logic.",
+        "If the requirement can be solved by Custom Default, prefer Custom Default instead of Calculated, Conditional, or Logic.",
+        "If the requirement can be solved by Calculated, prefer Calculated instead of Conditional or Logic.",
+        "If the requirement can be solved by Conditional, prefer Conditional instead of Logic.",
+        "Use Logic only when the behavior cannot be safely or clearly implemented by Custom Default, Calculated, or Conditional.",
+        "Mark this check as PASSED if the form uses the simplest suitable mechanism for each detected behavior.",
+        "Mark this check as FAILED if the form uses a more advanced or complex mechanism when a simpler Form.io feature would clearly satisfy the same requirement."
+      ],
+      "skill": []
+    },
+    "C5": {
+      "review_item": "Limit using Multi-Level Structure (many nested component)",
+      "description": "Review whether the form avoids excessive multi-level nesting.",
+      "goal": "Make sure the Form.io JSON does not use unnecessarily deep nested component structures that make the form difficult to maintain, deploy, or debug.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the deeply nested component path, the nesting depth or structure, and why it is too complex.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component path main > Panel \"Applicant\" > Columns [0] > Container \"Personal Info\" > Fieldset \"Details\" > Columns [1] > Text Field \"Name\" is deeply nested. Consider flattening the structure or splitting it into simpler sections."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Track the nesting path and nesting depth for every component.",
+        "Identify deeply nested structures created by multiple layers of panels, containers, columns, fieldsets, tabs, datagrids, editgrids, or other wrappers.",
+        "Treat repeated wrapper nesting as risky when it makes the component path difficult to understand or maintain.",
+        "If the project defines a maximum allowed nesting depth, use that threshold.",
+        "If no project-specific threshold is defined, flag structures that are clearly excessive, such as wrapper nesting deeper than 5 levels before reaching actual input fields.",
+        "Do not fail normal, necessary nesting such as one main wrapper containing one panel and one columns row.",
+        "Mark this check as PASSED if the form avoids excessive or unnecessary multi-level nesting.",
+        "Mark this check as FAILED if the form contains many nested wrapper levels that can reasonably be simplified without changing the business behavior."
+      ],
+      "skill": []
+    },
+    "C6": {
+      "review_item": "When working with multiple form components, consider using utility functions (Utils) to handle iteration and common operations.",
+      "description": "Review whether repeated component iteration or common operations are handled with reusable utility functions.",
+      "goal": "Make sure repeated logic across multiple form components uses utility functions where appropriate, instead of duplicating complex scripts in many places.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, specify the repeated logic pattern or repeated component operation and recommend using a utility function.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "Multiple components repeat similar logic to iterate over data.items and calculate display labels. Consider creating a shared utility function to handle this common operation."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Inspect all executable or expression-based fields, including calculateValue, calculatedValue, customDefaultValue, customConditional, validate.custom, and logic actions.",
+        "Identify repeated scripts, repeated loops, repeated dependency extraction, repeated formatting, repeated null handling, or repeated component traversal patterns.",
+        "When multiple form components perform similar iteration or common operations, check whether a reusable utility function is used.",
+        "Accept utility usage when there is a clearly shared helper function or common abstraction used by multiple logic blocks.",
+        "Do not fail very small one-line expressions that are not repeated or do not create maintainability risk.",
+        "Mark this check as PASSED if repeated component operations are either absent or handled through reusable utility functions.",
+        "Mark this check as FAILED if the form duplicates complex iteration or common operations across multiple components without a utility function."
+      ],
+      "skill": []
+    },
+    "C7": {
+      "review_item": "There must be 1 text field with Property Name is summary so that core platform can capture and put into request summary. In case application design itself does not have Summary field, put it in an admin panel and hide it.",
+      "description": "Review whether the form contains a summary field for core platform request summary capture.",
+      "goal": "Make sure the Form.io JSON contains exactly the platform-required property name key = \"summary\" so the core platform can capture and store the request summary.",
+      "output_style": {
+        "status_values": [
+          "PASSED",
+          "FAILED"
+        ],
+        "feedback_requirement": "If failed, return status FAILED and explain that the form does not contain a summary field for core platform request summary capture.",
+        "example": {
+          "Status": "FAILED",
+          "Note / Feedback": "No component with key = \"summary\" was found. The form must contain one text field with property name/key = \"summary\" so the core platform can capture the request summary. If the application design does not have a visible Summary field, place it in the Admin panel and hide it."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively.",
+        "Inspect every component key.",
+        "Check whether there is any component whose key is exactly \"summary\".",
+        "The expected component should normally be a text field or another suitable text-input component that can hold the request summary.",
+        "If the application design itself has a Summary field, ensure that field uses key = \"summary\".",
+        "If the application design does not have a visible Summary field, the form should include a hidden summary field inside the Admin panel.",
+        "Mark this check as PASSED if at least one component with key = \"summary\" exists.",
+        "Mark this check as FAILED if no component with key = \"summary\" is found."
+      ],
+      "skill": []
+    }
+  }
+}

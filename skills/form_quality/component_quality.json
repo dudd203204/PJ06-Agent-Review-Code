@@ -1,0 +1,137 @@
+{
+  "category": "Component",
+  "description": "This skill group explains how to review component naming quality in a Form.io JSON file. The reviewer must inspect the input JSON, traverse all relevant top-level and nested components, and evaluate each defined check independently.",
+  "goal": "Review a Form.io JSON file and determine PASSED or FAILED for each check, with exact failure locations when a rule is violated.",
+  "output_style": {
+    "type": "structured_review",
+    "rules": [
+      "Review each check independently.",
+      "For every check, return PASSED or FAILED.",
+      "Do not assume a pass when evidence is missing.",
+      "If one item breaks the rule, that check must be FAILED.",
+      "If failed, clearly point out the exact component or location that caused the failure."
+    ],
+    "format": {
+      "A1": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, list ONLY the components that violate camelCase (do NOT list valid ones). For each violation, include label, line number, current invalid key, and suggested corrected key."
+      },
+      "A2": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the exact \"label\" of component that make this case failed current \"key\" and recommended better \"key\" based on the \"label\", preferably with clearer business context instead of simply removing the numeric suffix."
+      },
+      "A3": {
+        "Status": "PASSED or FAILED",
+        "Note / Feedback": "If failed, specify the exact \"label\" of component that make this case failed and recommended corrected \"label\" by adding the \"ADMIN_\" prefix."
+      }
+    }
+  },
+  "procedure": [
+    "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+    "Traverse all components recursively, including nested child components inside panels, containers, columns, fieldsets, and other wrappers.",
+    "Apply each skill check independently.",
+    "Collect evidence for pass/fail decisions.",
+    "Return PASSED or FAILED for each skill with exact failure locations when applicable."
+  ],
+  "skill": {
+    "A1": {
+      "review_item": "Camel case for API Property",
+      "description": "Review whether every component \"key\" follows **camelCase** naming for the API property / Form.io \"key\". Components with label \"ADMIN_Sys Attachment Auth\" inside the \"Admin\" panel are excepted. All other components must follow camelCase. Report ALL violations found (not just the first one).",
+      "goal": "Make sure every component \"key\" is written in **camelCase** so the API property name is clean and consistent. When violations are found, report ALL violations together (not just the first one). The only exception is the \"ADMIN_Sys Attachment Auth\" component when it is located inside the \"Admin\" panel.",
+      "output_style": {
+        "status_values": ["PASSED", "FAILED"],
+        "feedback_requirement": "If failed, report ONLY the components that VIOLATE camelCase. Do NOT list components with valid camelCase keys. For each violation, specify the exact component label, line number, current invalid \"key\", and suggested corrected camelCase \"key\". Do NOT report just one component - collect and list ALL violations together.",
+        "example": {
+          "failed_multiple": "FAILED: Found 3 components with camelCase violations:\n(1) Component \"label\" = \"Sys Attachment Auth\" (line 0327) -> \"key\" = \"sys_attachment_auth\" is not camelCase. Suggested corrected \"key\" = \"sysAttachmentAuth\".\n(2) Component \"label\" = \"Created by\" (line 0343) -> \"key\" = \"created_By\" is not camelCase. Suggested corrected \"key\" = \"createdBy\".\n(3) Component \"label\" = \"Test Field\" (line 0082) -> \"key\" = \"test_field\" is not camelCase. Suggested corrected \"key\" = \"testField\".",
+          "exception": "Do not apply this rule to components with label EXACTLY \"ADMIN_Sys Attachment Auth\" that are located inside the panel labeled \"Admin\". These components are exempt from camelCase requirement. However, \"ADMIN_Sys Attachment Auth\" located OUTSIDE the Admin panel must follow camelCase. Similarly, components inside Admin panel that do NOT have label \"ADMIN_Sys Attachment Auth\" must follow camelCase. Components with type \"htmlelement\" or \"columns\" are always exempt."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components, including nested child components inside panels, containers, columns, fieldsets, and other wrappers.",
+        "**EXHAUSTIVE SCAN REQUIREMENT**: You MUST check EVERY SINGLE component in the entire file. Do not stop early or report only a subset.",
+        "For each component, FIND the value of the \"key\" field.",
+        "**IMPORTANT EXCEPTION**: A component is IGNORED from camelCase check ONLY if BOTH conditions are met:",
+        "  1. The component's \"label\" is EXACTLY and COMPLETELY \"ADMIN_Sys Attachment Auth\" (case-sensitive match), AND",
+        "  2. The component is a direct or nested child inside a panel whose \"label\" is EXACTLY \"Admin\"",
+        "  If the component has label \"ADMIN_Sys Attachment Auth\" but is OUTSIDE the \"Admin\" panel → NOT excepted, must check camelCase.",
+        "  If the component is inside \"Admin\" panel but label is NOT \"ADMIN_Sys Attachment Auth\" → NOT excepted, must check camelCase.",
+        "IGNORE components whose type is \"htmlelement\" or \"columns\" (regardless of label or location).",
+        "Check whether each remaining \"key\" follows **camelCase**.",
+        "**camelCase** means the first word MUST start with a lowercase letter, and each next word starts with an uppercase letter, with NO spaces, hyphens (-), or underscores (_).",
+        "ACCEPT: \"visitName\", \"startDateOfVisit\", and \"valueToBeScrapping\".",
+        "REJECT: \"VisitName\", \"visit_name\", \"visit-name\", and \"visit name\".",
+        "**CRITICAL EXHAUSTIVE COLLECTION**: As you traverse the entire file, maintain a COMPLETE LIST of ALL components that fail camelCase check. Include every single one. Do NOT skip any or report only some.",
+        "When FAILED: Iterate through your complete list one by one and report EVERY SINGLE component that violates camelCase.",
+        "If all checked keys are **camelCase**, mark this check as PASSED.",
+        "If at least one checked key is not **camelCase**, mark this check as FAILED and include ALL violations in the feedback (do not limit to 1, 2, or a few - include them all). For EACH violation, specify: (1) component label, (2) line number, (3) current invalid key, (4) suggested corrected camelCase key."
+      ],
+      "skill": []
+    },
+    "A2": {
+      "review_item": "Meaningful API Property",
+      "description": "Review whether component \"key\" values are auto-generated duplicates that FormIO created due to duplicate labels. This check specifically detects keys that appear to be automatically generated with numeric suffixes when duplicate labels or duplicate derived keys exist. Report ALL violations found.",
+      "goal": "Detect and reject auto-generated keys with numeric suffixes that indicate FormIO duplicate-prevention, while accepting any meaningfully chosen keys regardless of semantic richness. When violations are found, report ALL violations together (not just the first one).",
+      "output_style": {
+        "status_values": ["PASSED", "FAILED"],
+        "feedback_requirement": "If failed, specify the component label, line number, current auto-generated \"key\" with numeric suffix, and recommended meaningful \"key\" without the suffix. Report ALL violations found, not just one.",
+        "example": {
+          "failed_multiple": "FAILED: Found 2 components with auto-generated numeric suffixes:\n(1) Component \"label\" = \"Test text field 1\" (line 0083) -> \"key\" = \"testTextField1\" has numeric suffix. Recommended \"key\" = \"testTextField\".\n(2) Component \"label\" = \"Value to be Scrapping\" (line 0120) -> \"key\" = \"valueToBeScrapping1\" has numeric suffix. Recommended \"key\" = \"valueToBeScrapping\".",
+          "succeed": "Component \"label\" = \"First Name\", \"key\" = \"firstName\" is acceptable because it appears chosen, not auto-generated.",
+          "others": "Short keys like \"id\", \"x\", \"data\" are acceptable if they appear intentional, not auto-generated. Keys like \"main\", \"summary\" are convention-based and acceptable.",
+          "exception": "Do not apply this rule to components of type html, htmlelement, or columns which can legitimately use numeric suffixes like html1, html2, columns1, columns2."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "Traverse all components recursively, excluding components whose type is html, htmlelement, or columns.",
+        "**EXHAUSTIVE SCAN REQUIREMENT**: You MUST check EVERY SINGLE component in the entire file. Do not stop early or report only a subset.",
+        "For each component, collect both the \"label\" value and the \"key\" value when available.",
+        "If a component DOES NOT HAVE a \"key\", SKIP this check for that component.",
+        "Analyze each \"key\" to determine whether it appears to be auto-generated by FormIO.",
+        "**CRITICAL**: If a \"key\" ends with one or more digits (0-9), it indicates FormIO auto-generation for duplicate-prevention. Examples: textField1, textField2, name1, name2, component1, visitDate1, testTextField1.",
+        "Do NOT accept any intentional reasoning for numeric suffixes - keys ending in numbers should be regenerated without the suffix unless it is a special type (html, htmlelement, columns already excluded).",
+        "REJECT all keys ending in numeric digits: \"visitDate1\", \"firstName2\", \"component99\", \"testTextField1\", etc. These must be regenerated as \"visitDate\", \"firstName\", \"component\", \"testTextField\".",
+        "ACCEPT non-numeric-suffix keys even if they are short, generic, or convention-based: \"id\", \"x\", \"count\", \"main\", \"summary\".",
+        "**CRITICAL EXHAUSTIVE COLLECTION**: As you traverse the entire file, maintain a COMPLETE LIST of ALL components that end with numeric suffixes. Include every single one. Do NOT skip any or report only some.",
+        "When FAILED: Iterate through your complete list one by one and report EVERY SINGLE component with numeric suffix (do not limit to 1, 2, or a few - include them all).",
+        "If all checked keys do NOT end with numeric suffixes, mark this check as PASSED.",
+        "If at least one checked key ends with a numeric suffix, mark this check as FAILED with line numbers, labels, current keys (with suffix), and recommended keys (without suffix). Include ALL violations, not just one or two."
+      ],
+      "skill": []
+    },
+    "A3": {
+      "review_item": "If component is using for admin purpose, have clear indicator saying that this is for admin. E.g: ADMIN_TempField (easy to detect and remove in excel or UIB config)",
+      "description": "Review whether admin-purpose components are clearly marked as admin-only fields using the prefix \"ADMIN_\" in their \"label\", especially when they are placed inside the panel labeled \"Admin\". Report ALL violations found.",
+      "goal": "Make sure admin-purpose components are easy to detect and remove in Excel or UIB configuration by using the prefix \"ADMIN_\" in their \"label\". When violations are found, report ALL violations together.",
+      "output_style": {
+        "status_values": ["PASSED", "FAILED"],
+        "feedback_requirement": "If failed, specify the exact location inside the \"Admin\" panel, line number, the \"label\" that does not start with \"ADMIN_\", and the recommended \"label\" with ADMIN_ prefix. Report ALL violations found, not just one.",
+        "example": {
+          "failed_multiple": "FAILED: Found 2 components in Admin panel without ADMIN_ prefix:\n(1) Panel \"Admin\" -> component \"label\" = \"Approver comments\" (line 0497) does not use the required prefix. Recommended \"label\" = \"ADMIN_Approver comments\".\n(2) Panel \"Admin\" -> component \"label\" = \"Rejection reason\" (line 0505) does not use the required prefix. Recommended \"label\" = \"ADMIN_Rejection reason\".",
+          "succeed": "Panel \"Admin\" -> component \"label\" such as \"ADMIN_subject\" and \"ADMIN_createdBy\" clearly indicate admin-only usage.",
+          "others": "If a component is outside the \"Admin\" panel and is business-facing, \"label\" such as \"Subject\" or \"Summary\" are acceptable without the prefix. Structural wrappers such as \"Columns\" are neutral and should not be treated as admin business fields by themselves.",
+          "exception": "If no panel labeled \"Admin\" exists, this check can be PASSED by default unless project rules explicitly require an Admin panel and admin-purpose fields."
+        }
+      },
+      "procedure": [
+        "Read the input Form.io JSON file from \n[numbered_source]\n to \n[/numbered_source].",
+        "**CRITICAL**: Locate the exact panel object whose \"label\" is exactly \"Admin\" by examining lines 0486-0520 (or the equivalent Admin panel in your file).",
+        "Once found, DIRECTLY EXAMINE the \"components\" array inside this \"Admin\" panel.",
+        "**EXHAUSTIVE SCAN**: Check EVERY SINGLE child component inside the \"Admin\" panel. Do not skip any or assume any are compliant.",
+        "For each child component in the Admin panel, find its \"label\" value.",
+        "Focus on actual admin-purpose fields or display components, not pure layout wrappers such as columns, containers, tables, wells, or other structural components that exist only for layout.",
+        "Check whether each \"label\" starts with the prefix \"ADMIN_\".",
+        "ACCEPT: \"ADMIN_subject\" and \"ADMIN_createdBy\".",
+        "REJECT: \"subject\" and \"createdBy\" when they are inside the Admin panel (without the ADMIN_ prefix).",
+        "**MANDATORY EXHAUSTIVE COLLECTION**: As you traverse the Admin panel, maintain a COMPLETE LIST of ALL components that do NOT have the \"ADMIN_\" prefix. Include every single one.",
+        "When FAILED: Iterate through your complete list one by one and report EVERY SINGLE component that violates the ADMIN_ prefix requirement (do not limit to just 1 or 2 - include them all).",
+        "If all admin-purpose child component \"label\" inside every \"Admin\" panel start with \"ADMIN_\", mark this check as PASSED.",
+        "If at least one admin-purpose child component \"label\" inside an \"Admin\" panel does not start with \"ADMIN_\", mark this check as FAILED and include ALL violations.",
+        "If an \"Admin\" panel exists but an admin-purpose child component has no \"label\", treat it as FAILED.",
+        "If no panel labeled \"Admin\" exists, mark this check as PASSED unless project rules state that the Admin panel is mandatory."
+      ],
+      "skill": []
+    }
+  }
+}

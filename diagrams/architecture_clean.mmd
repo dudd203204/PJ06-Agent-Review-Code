@@ -1,0 +1,32 @@
+graph TD
+    A["📋 Config"] --> B["📂 Input Files"]
+    B --> C{"🔀 Route?"}
+    C -->|formio| D1["✅ 4 Skills"]
+    C -->|backoffice| D2["✅ 1 Skill"]
+    D1 --> E["⚙️ Execute"]
+    D2 --> E
+    E --> F["📝 Prompts"]
+    F --> G["🤖 LLM Call"]
+    G --> H{"Response?"}
+    H -->|JSON| I["Parse"]
+    H -->|List| J["Convert"]
+    H -->|Empty| K["Fill"]
+    I --> L["✓ Validate"]
+    J --> L
+    K --> L
+    L --> M["🛡️ Policy"]
+    M --> N["📊 Output"]
+    N --> O["✨ Done"]
+    
+    style A fill:#90EE90,stroke:#333,color:#000
+    style B fill:#90EE90,stroke:#333,color:#000
+    style E fill:#FFD700,stroke:#333,color:#000
+    style F fill:#FFB347,stroke:#333,color:#000
+    style G fill:#FF69B4,stroke:#333,color:#000
+    style I fill:#87CEEB,stroke:#333,color:#000
+    style J fill:#FFD700,stroke:#333,color:#000
+    style K fill:#FFD700,stroke:#333,color:#000
+    style L fill:#87CEEB,stroke:#333,color:#000
+    style M fill:#DDA0DD,stroke:#333,color:#000
+    style N fill:#87CEEB,stroke:#333,color:#000
+    style O fill:#90EE90,stroke:#333,color:#000

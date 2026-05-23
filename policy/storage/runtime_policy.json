@@ -1,0 +1,82 @@
+{
+  "active_profile": "default",
+  "selection": {
+    "mode": "skillset",
+    "skill_file": "",
+    "skillset": "form_quality"
+  },
+  "routes": {
+    "route_a": {
+      "label": "FormIO",
+      "profile": "route_a_formio",
+      "skillset": "form_quality",
+      "skills": [
+        "component_quality",
+        "form_structure_quality",
+        "field_logic_quality",
+        "run_time_quality"
+      ]
+    },
+    "route_b": {
+      "label": "Backoffice",
+      "profile": "route_b_backoffice",
+      "skillset": "back_office_quality",
+      "skills": [
+        "review_back_office"
+      ]
+    }
+  },
+  "profiles": {
+    "default": {
+      "layer": "application",
+      "allowed_skillsets": [
+        "*"
+      ],
+      "allowed_skills": [
+        "*"
+      ],
+      "excluded_skills": [],
+      "allowed_tools": [
+        "*"
+      ]
+    },
+    "route_a_formio": {
+      "layer": "application",
+      "allowed_skillsets": [
+        "form_quality"
+      ],
+      "allowed_skills": [
+        "component_quality",
+        "form_structure_quality",
+        "field_logic_quality",
+        "run_time_quality"
+      ],
+      "excluded_skills": [
+      ],
+      "allowed_tools": [
+        "read_project_file",
+        "list_project_files",
+        "list_skills",
+        "load_skill",
+        "get_hyperparameters"
+      ]
+    },
+    "route_b_backoffice": {
+      "layer": "application",
+      "allowed_skillsets": [
+        "back_office_quality"
+      ],
+      "allowed_skills": [
+        "review_back_office"
+      ],
+      "excluded_skills": [],
+      "allowed_tools": [
+        "read_project_file",
+        "list_project_files",
+        "list_skills",
+        "load_skill",
+        "get_hyperparameters"
+      ]
+    }
+  }
+}
