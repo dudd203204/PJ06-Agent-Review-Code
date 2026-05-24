@@ -1,0 +1,2456 @@
+{
+    "application": {
+        "key": "AMLAFINPGTOFORNEC",
+        "name": "Request for Advance Payment to Suppliers",
+        "description": "Allows users request the advance payment to suppliers",
+        "application_type_id": "dynamic",
+        "application_status_id": "published",
+        "is_allow_approver_edit": true
+    },
+    "archive": {
+        "start_from": 12,
+        "archive_period": 999
+    },
+    "instruction": {
+        "instruction": "<p style=\"text-align:center\"><strong>Solicita&ccedil;&atilde;o de Pagamento Antecipado a Fornecedores</strong></p>\n\n<p>&nbsp;</p>\n\n<p>Esta solicita&ccedil;&atilde;o &eacute; v&aacute;lida para Fornecedores: Nacionais e Internacionais</p>\n\n<ul>\n\t<li>Pagamento Antecipado (Fornecedores Nacionais e Internacionais)</li>\n\t<li>Pagamento &agrave; vista (Apenas para Fornecedores Internacionais)</li>\n</ul>\n\n<p>Lembramos que estes processos devem estar de acordo com o regulamento 10 e regulamento 3.</p>\n"
+    },
+    "process_owners": [
+        {
+            "process_owner_type_id": "process_owner",
+            "ntid": "CDS1JVL",
+            "entity_code": "GS/OSP22-LA"
+        },
+        {
+            "process_owner_type_id": "delegator",
+            "ntid": "CDS1JVL",
+            "entity_code": ""
+        }
+    ],
+    "security_classes": [
+        {
+            "security_class_id": 3,
+            "level": 2
+        },
+        {
+            "security_class_id": 1,
+            "level": 2
+        },
+        {
+            "security_class_id": 2,
+            "level": 2
+        }
+    ],
+    "form": {
+        "form_url": "https://formio-staging.inside.bosch.cloud/d-adbmpjzjapffcmi/amlafinpgtofornec"
+    },
+    "application_workflow": {
+        "application_segments": [],
+        "rules": [],
+        "segment_orders": [
+            {
+                "uuid": "c2172675-673f-427a-95c5-3f97981d02d9",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 1
+            },
+            {
+                "uuid": "f1d13c6e-9daa-481c-8a4a-d8be9e579c17",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 2
+            },
+            {
+                "uuid": "433e2a2a-c607-4a56-a257-5ffd7c7fd5b8",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 3
+            },
+            {
+                "uuid": "19a0bafb-43fd-4a43-843d-93a1e2ed8b9c",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 4
+            },
+            {
+                "uuid": "611d54fe-7ae3-4269-b385-11dc2f574fd7",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 5
+            },
+            {
+                "uuid": "cbb2b380-7aff-4ba8-9b80-da26426180a6",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 6
+            },
+            {
+                "uuid": "209dc77d-7b72-4915-951e-e793b9d9409d",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 7
+            },
+            {
+                "uuid": "d77c1d03-d0c6-405c-afb1-a2ebde55d3af",
+                "rule_uuid": "",
+                "segment_uuid": "",
+                "order": 8
+            }
+        ],
+        "workflow_approvers": [
+            {
+                "uuid": "2cda853a-901d-4ebb-b7f1-a3f512056446",
+                "rule_uuid": "",
+                "segment_order_uuid": "c2172675-673f-427a-95c5-3f97981d02d9",
+                "function_name": "OPCIONAL",
+                "approver_ntid": "",
+                "approver_group_name": "",
+                "is_moveable": true,
+                "is_editable": true,
+                "is_deletable": true,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "9a709bfb-103b-46a2-9622-2cde5e2e4561",
+                "rule_uuid": "",
+                "segment_order_uuid": "f1d13c6e-9daa-481c-8a4a-d8be9e579c17",
+                "function_name": "Aprovador",
+                "approver_ntid": "",
+                "approver_group_name": "",
+                "is_moveable": false,
+                "is_editable": true,
+                "is_deletable": false,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "f43a9b90-7c6c-4c91-a1cb-f5bad841b8e5",
+                "rule_uuid": "",
+                "segment_order_uuid": "433e2a2a-c607-4a56-a257-5ffd7c7fd5b8",
+                "function_name": "Aprovador",
+                "approver_ntid": "",
+                "approver_group_name": "",
+                "is_moveable": false,
+                "is_editable": true,
+                "is_deletable": false,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "4878ed82-2805-48e5-b1f2-989af0c85df0",
+                "rule_uuid": "",
+                "segment_order_uuid": "19a0bafb-43fd-4a43-843d-93a1e2ed8b9c",
+                "function_name": "Aprovador",
+                "approver_ntid": "XJ61JVL",
+                "approver_group_name": "",
+                "is_moveable": false,
+                "is_editable": true,
+                "is_deletable": false,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "724b7ac0-dc9f-4a9a-8ab6-6c0450dc6939",
+                "rule_uuid": "",
+                "segment_order_uuid": "611d54fe-7ae3-4269-b385-11dc2f574fd7",
+                "function_name": "Aprovador",
+                "approver_ntid": "",
+                "approver_group_name": "",
+                "is_moveable": true,
+                "is_editable": true,
+                "is_deletable": true,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "f3f1e9b7-7624-4fd9-b6da-6d95805704c3",
+                "rule_uuid": "",
+                "segment_order_uuid": "cbb2b380-7aff-4ba8-9b80-da26426180a6",
+                "function_name": "Aprovador",
+                "approver_ntid": "JL61JVL",
+                "approver_group_name": "",
+                "is_moveable": false,
+                "is_editable": true,
+                "is_deletable": false,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "9e9eaea1-8df5-4696-833a-9f079b0e75a0",
+                "rule_uuid": "",
+                "segment_order_uuid": "209dc77d-7b72-4915-951e-e793b9d9409d",
+                "function_name": "Aprovador",
+                "approver_ntid": "FT61CA",
+                "approver_group_name": "",
+                "is_moveable": true,
+                "is_editable": true,
+                "is_deletable": true,
+                "approver_type": "default",
+                "approver_action_control": ""
+            },
+            {
+                "uuid": "34fdca6b-d05a-4c2a-9704-b0270ae851a4",
+                "rule_uuid": "",
+                "segment_order_uuid": "d77c1d03-d0c6-405c-afb1-a2ebde55d3af",
+                "function_name": "Aprovador",
+                "approver_ntid": "XJ61JVL",
+                "approver_group_name": "",
+                "is_moveable": false,
+                "is_editable": true,
+                "is_deletable": false,
+                "approver_type": "default",
+                "approver_action_control": ""
+            }
+        ],
+        "workflow_subscribers": [],
+        "segment_approvers": [],
+        "segment_subscribers": []
+    },
+    "attachment_configs": [],
+    "action_control": {
+        "configuration": "{\"actions\":{\"approver\":{\"approve\":true,\"decline\":true,\"send_back\":true,\"forward\":true,\"agree\":false,\"disagree\":false,\"edit_form_data\":true,\"edit_workflow\":true,\"add_comment\":false,\"private_approval_view\":false,\"enable_uib_action\":false},\"requestor\":{\"submit\":false,\"save_as_draft\":false,\"withdraw\":true,\"edit_form_data\":true,\"cancel\":true,\"resend\":true,\"delete\":false,\"edit_workflow\":false,\"import_workflow\":false,\"add_comment\":false},\"system\":{\"copy\":true,\"print\":true,\"notification\":true,\"copy_email\":false,\"change_language\":false},\"segment\":{\"add_approver\":true,\"move\":false,\"delete\":true}}}"
+    },
+    "excel_configs": {
+        "application_key": "AMLAFINPGTOFORNEC",
+        "excel_fields": [
+            {
+                "key": "checkNaN",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_Check NaN",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": false,
+                "is_deprecated": false
+            },
+            {
+                "key": "field",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_Field",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "sys_attachment_auth",
+                "include_to_report": false,
+                "is_deprecated": false
+            },
+            {
+                "key": "file",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_File",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "files",
+                "include_to_report": false,
+                "is_deprecated": false
+            },
+            {
+                "key": "author_ntid",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_Author NTID",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "files",
+                "include_to_report": false,
+                "is_deprecated": false
+            },
+            {
+                "key": "author_name",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_Author Name",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "files",
+                "include_to_report": false,
+                "is_deprecated": false
+            },
+            {
+                "key": "files",
+                "value_type": "datagrid",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_Files",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "sys_attachment_auth",
+                "value_type": "datagrid",
+                "is_mandatory": false,
+                "order": 0,
+                "value": "ADMIN_Sys Attachment Auth",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Application",
+                "value_type": "sys_application_name",
+                "is_mandatory": false,
+                "order": 1,
+                "value": "Application",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Request No",
+                "value_type": "sys_request_no",
+                "is_mandatory": false,
+                "order": 2,
+                "value": "Request No",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Summary",
+                "value_type": "sys_summary",
+                "is_mandatory": false,
+                "order": 3,
+                "value": "Summary",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Status",
+                "value_type": "sys_status",
+                "is_mandatory": false,
+                "order": 4,
+                "value": "Status",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Current Assignee",
+                "value_type": "sys_current_assignee",
+                "is_mandatory": false,
+                "order": 5,
+                "value": "Current Assignee",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Requestor",
+                "value_type": "sys_requestor",
+                "is_mandatory": false,
+                "order": 6,
+                "value": "Requestor",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Request Status",
+                "value_type": "sys_request_status",
+                "is_mandatory": false,
+                "order": 7,
+                "value": "Progress",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Created On",
+                "value_type": "sys_created_on",
+                "is_mandatory": false,
+                "order": 8,
+                "value": "Created On",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Updated On",
+                "value_type": "sys_updated_on",
+                "is_mandatory": false,
+                "order": 9,
+                "value": "Updated On",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "ncmOfMerchandise",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 10,
+                "value": "NCM Of Merchandise:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "caseNo",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 11,
+                "value": "Case No.:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "invoiceNoProforma",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 12,
+                "value": "Invoice No. (Proforma):",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "shipmentDate",
+                "value_type": "datetime",
+                "is_mandatory": false,
+                "order": 13,
+                "value": "Shipment Date:",
+                "format": "yyyy-MM-dd",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "totalValueInternationalSuppliers",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 14,
+                "value": "Total Value:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "advanceValueInternationalSuppliers",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 15,
+                "value": "Advance Value:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "ofAdvanceInternationalSuppliers",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 16,
+                "value": "% Of Advance:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "guaranteeInternationalSuppliers",
+                "value_type": "radio",
+                "is_mandatory": true,
+                "order": 17,
+                "value": "Guarantee:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "incoterm",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 18,
+                "value": "INCOTERM:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "whichInternationalSuppliers",
+                "value_type": "select",
+                "is_mandatory": false,
+                "order": 19,
+                "value": "Which?:",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "specifyOthers",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 20,
+                "value": "Specify (Others):",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "reasonForRequestInternationalSuppliers",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 21,
+                "value": "Reason For Request:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "advanceForPurchaseOfInternationalSuppliers",
+                "value_type": "select",
+                "is_mandatory": false,
+                "order": 22,
+                "value": "Advance For Purchase Of:",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "currency",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 23,
+                "value": "Currency:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "destinationInternationalSuppliers",
+                "value_type": "select",
+                "is_mandatory": false,
+                "order": 24,
+                "value": "Destination:",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "justificationCasesWithoutGuaranteeInternationalSuppliers",
+                "value_type": "textarea",
+                "is_mandatory": false,
+                "order": 25,
+                "value": "Justification (Cases Without Guarantee):",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "modality",
+                "value_type": "select",
+                "is_mandatory": false,
+                "order": 26,
+                "value": "Modality:",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "specifyNationalSuppliers",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 27,
+                "value": "Specify:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "AdvanceToInternationalSuppliers",
+                "value_type": "checkbox",
+                "is_mandatory": false,
+                "order": 28,
+                "value": "2) Advance To International Suppliers",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "supplierName",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 29,
+                "value": "Supplier Name:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "sapNo",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 30,
+                "value": "SAP No.:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "divisionAndBusinessLocation",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 31,
+                "value": "Division And Business Location:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "paymentDate",
+                "value_type": "datetime",
+                "is_mandatory": true,
+                "order": 32,
+                "value": "Payment Date:",
+                "format": "yyyy-MM-dd",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "requester",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 33,
+                "value": "Requester:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "extension",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 34,
+                "value": "Extension:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "requesterManager",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 35,
+                "value": "Requester Manager:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "department",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 36,
+                "value": "Department:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "advanceExpiration",
+                "value_type": "datetime",
+                "is_mandatory": false,
+                "order": 37,
+                "value": "Advance Expiration:",
+                "format": "yyyy-MM-dd",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "ordercontractNo",
+                "value_type": "textfield",
+                "is_mandatory": false,
+                "order": 38,
+                "value": "Order/Contract No.:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "AdvanceToNationalSuppliers",
+                "value_type": "checkbox",
+                "is_mandatory": false,
+                "order": 39,
+                "value": "1) Advance To National Suppliers",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "totalValue",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 40,
+                "value": "Total Value:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "ofAdvance",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 41,
+                "value": "% Of Advance:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "advanceValue",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 42,
+                "value": "Advance Value:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "guarantee",
+                "value_type": "radio",
+                "is_mandatory": true,
+                "order": 43,
+                "value": "Guarantee:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "which",
+                "value_type": "select",
+                "is_mandatory": false,
+                "order": 44,
+                "value": "Which?",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "justificationCasesWithoutGuarantee",
+                "value_type": "textarea",
+                "is_mandatory": false,
+                "order": 45,
+                "value": "Justification (Cases Without Guarantee):",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "reasonForRequest",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 46,
+                "value": "Reason For Request:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "advanceForPurchaseOf",
+                "value_type": "select",
+                "is_mandatory": true,
+                "order": 47,
+                "value": "Advance For Purchase Of:",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "destinationNationalSuppliers",
+                "value_type": "select",
+                "is_mandatory": true,
+                "order": 48,
+                "value": "Destination:",
+                "format": "",
+                "multiple": false,
+                "data_source": "resource",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "orderNo",
+                "value_type": "textfield",
+                "is_mandatory": true,
+                "order": 49,
+                "value": "Order No.:",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "NotifyWhenApproved",
+                "value_type": "sys_whenapproved",
+                "is_mandatory": false,
+                "order": 50,
+                "value": "Notify when request is approved",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "Workflow",
+                "value_type": "sys_workflow",
+                "is_mandatory": true,
+                "order": 51,
+                "value": "Workflow",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            },
+            {
+                "key": "NotifyWhenDeclined",
+                "value_type": "sys_whendeclined",
+                "is_mandatory": false,
+                "order": 52,
+                "value": "Notify when request is declined",
+                "format": "",
+                "multiple": false,
+                "data_source": "",
+                "parent_field": "",
+                "include_to_report": true,
+                "is_deprecated": false
+            }
+        ],
+        "is_active": true
+    },
+    "uib_configs": {
+        "application_key": "AMLAFINPGTOFORNEC",
+        "subject_key": "Summary",
+        "config_items": [
+            {
+                "key": "summary",
+                "value_type_id": 1,
+                "order": 1,
+                "value": "Summary"
+            },
+            {
+                "key": "supplierName",
+                "value_type_id": 1,
+                "order": 2,
+                "value": "Supplier Name:"
+            },
+            {
+                "key": "sapNo",
+                "value_type_id": 1,
+                "order": 3,
+                "value": "SAP No.:"
+            },
+            {
+                "key": "divisionAndBusinessLocation",
+                "value_type_id": 1,
+                "order": 4,
+                "value": "Division And Business Location:"
+            },
+            {
+                "key": "paymentDate",
+                "value_type_id": 4,
+                "order": 5,
+                "value": "Payment Date:"
+            },
+            {
+                "key": "requester",
+                "value_type_id": 1,
+                "order": 6,
+                "value": "Requester:"
+            },
+            {
+                "key": "extension",
+                "value_type_id": 1,
+                "order": 7,
+                "value": "Extension:"
+            },
+            {
+                "key": "requesterManager",
+                "value_type_id": 1,
+                "order": 8,
+                "value": "Requester Manager:"
+            },
+            {
+                "key": "department",
+                "value_type_id": 1,
+                "order": 9,
+                "value": "Department:"
+            },
+            {
+                "key": "orderNo",
+                "value_type_id": 1,
+                "order": 10,
+                "value": "Order No.:"
+            },
+            {
+                "key": "totalValue",
+                "value_type_id": 1,
+                "order": 11,
+                "value": "Total Value:"
+            },
+            {
+                "key": "ofAdvance",
+                "value_type_id": 1,
+                "order": 12,
+                "value": "% Of Advance:"
+            },
+            {
+                "key": "advanceValue",
+                "value_type_id": 1,
+                "order": 13,
+                "value": "Advance Value:"
+            },
+            {
+                "key": "guarantee",
+                "value_type_id": 1,
+                "order": 14,
+                "value": "Guarantee:"
+            },
+            {
+                "key": "reasonForRequest",
+                "value_type_id": 1,
+                "order": 15,
+                "value": "Reason For Request:"
+            },
+            {
+                "key": "advanceForPurchaseOf",
+                "value_type_id": 1,
+                "order": 16,
+                "value": "Advance For Purchase Of:"
+            },
+            {
+                "key": "destinationNationalSuppliers",
+                "value_type_id": 1,
+                "order": 17,
+                "value": "Destination:"
+            },
+            {
+                "key": "ordercontractNo",
+                "value_type_id": 1,
+                "order": 18,
+                "value": "Order/Contract No.:"
+            },
+            {
+                "key": "modality",
+                "value_type_id": 1,
+                "order": 19,
+                "value": "Modality:"
+            },
+            {
+                "key": "currency",
+                "value_type_id": 1,
+                "order": 20,
+                "value": "Currency:"
+            },
+            {
+                "key": "totalValueInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 21,
+                "value": "Total Value:"
+            },
+            {
+                "key": "ofAdvanceInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 22,
+                "value": "% Of Advance:"
+            },
+            {
+                "key": "advanceValueInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 23,
+                "value": "Advance Value:"
+            },
+            {
+                "key": "invoiceNoProforma",
+                "value_type_id": 1,
+                "order": 24,
+                "value": "Invoice No. (Proforma):"
+            },
+            {
+                "key": "guaranteeInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 25,
+                "value": "Guarantee:"
+            },
+            {
+                "key": "reasonForRequestInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 26,
+                "value": "Reason For Request:"
+            },
+            {
+                "key": "advanceForPurchaseOfInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 27,
+                "value": "Advance For Purchase Of:"
+            },
+            {
+                "key": "destinationInternationalSuppliers",
+                "value_type_id": 1,
+                "order": 28,
+                "value": "Destination:"
+            },
+            {
+                "key": "shipmentDate",
+                "value_type_id": 4,
+                "order": 29,
+                "value": "Shipment Date:"
+            }
+        ],
+        "is_active": true
+    },
+    "application_languages": {
+        "application_key": "AMLAFINPGTOFORNEC",
+        "languages": [
+            {
+                "language_code": "en",
+                "is_default": false,
+                "translation": [
+                    {
+                        "key": "Warranty Insurance",
+                        "value": "Warranty Insurance"
+                    },
+                    {
+                        "key": "Promissory Note",
+                        "value": "Promissory Note"
+                    },
+                    {
+                        "key": "Letter of Guarantee",
+                        "value": "Letter of Guarantee"
+                    },
+                    {
+                        "key": "Client Tooling = C",
+                        "value": "Client Tooling = C"
+                    },
+                    {
+                        "key": "Other Services = M",
+                        "value": "Other Services = M"
+                    },
+                    {
+                        "key": "Intangible Asset = A",
+                        "value": "Intangible Asset = A"
+                    },
+                    {
+                        "key": "Inventory = V",
+                        "value": "Inventory = V"
+                    },
+                    {
+                        "key": "Tangible Asset = B",
+                        "value": "Tangible Asset = B"
+                    },
+                    {
+                        "key": "PABR",
+                        "value": "PABR"
+                    },
+                    {
+                        "key": "CaP2",
+                        "value": "CaP2"
+                    },
+                    {
+                        "key": "JvL",
+                        "value": "JvL"
+                    },
+                    {
+                        "key": "CaP1",
+                        "value": "CaP1"
+                    },
+                    {
+                        "key": "CtP",
+                        "value": "CtP"
+                    },
+                    {
+                        "key": "ArP",
+                        "value": "ArP"
+                    },
+                    {
+                        "key": "Sight Draft - Shipping Document Available",
+                        "value": "Sight Draft - Shipping Document Available"
+                    },
+                    {
+                        "key": "Advance - No Shipping Document",
+                        "value": "Advance - No Shipping Document"
+                    },
+                    {
+                        "key": "Guarantee Insurance",
+                        "value": "Guarantee Insurance"
+                    },
+                    {
+                        "key": "Letter of Credit",
+                        "value": "Letter of Credit"
+                    },
+                    {
+                        "key": "General Data",
+                        "value": "General Data"
+                    },
+                    {
+                        "key": "National Suppliers",
+                        "value": "National Suppliers"
+                    },
+                    {
+                        "key": "International Suppliers",
+                        "value": "International Suppliers"
+                    },
+                    {
+                        "key": "Attachments",
+                        "value": "Attachments"
+                    },
+                    {
+                        "key": "Admin",
+                        "value": "Admin"
+                    },
+                    {
+                        "key": "Supplier Name:",
+                        "value": "Supplier Name:"
+                    },
+                    {
+                        "key": "SAP No.:",
+                        "value": "SAP No.:"
+                    },
+                    {
+                        "key": "Division And Business Location:",
+                        "value": "Division And Business Location:"
+                    },
+                    {
+                        "key": "Ex: 9081/6171, 9082/6832",
+                        "value": "Ex: 9081/6171, 9082/6832"
+                    },
+                    {
+                        "key": "Payment Date:",
+                        "value": "Payment Date:"
+                    },
+                    {
+                        "key": "(dd/mm/aaaa)",
+                        "value": "(dd/mm/yyyy)"
+                    },
+                    {
+                        "key": "Requester:",
+                        "value": "Requester:"
+                    },
+                    {
+                        "key": "Extension:",
+                        "value": "Extension:"
+                    },
+                    {
+                        "key": "Requester Manager:",
+                        "value": "Requester Manager:"
+                    },
+                    {
+                        "key": "Department:",
+                        "value": "Department:"
+                    },
+                    {
+                        "key": "Advance Expiration:",
+                        "value": "Advance Expiration:"
+                    },
+                    {
+                        "key": "1) Advance To National Suppliers",
+                        "value": "1) Advance To National Suppliers"
+                    },
+                    {
+                        "key": "Order No.:",
+                        "value": "Order No.:"
+                    },
+                    {
+                        "key": "Total Value:",
+                        "value": "Total Value:"
+                    },
+                    {
+                        "key": "% Of Advance:",
+                        "value": "% Of Advance:"
+                    },
+                    {
+                        "key": "Advance Value:",
+                        "value": "Advance Value:"
+                    },
+                    {
+                        "key": "Guarantee:",
+                        "value": "Guarantee:"
+                    },
+                    {
+                        "key": "No",
+                        "value": "No"
+                    },
+                    {
+                        "key": "Yes",
+                        "value": "Yes"
+                    },
+                    {
+                        "key": "Which?",
+                        "value": "Which?"
+                    },
+                    {
+                        "key": "Please select",
+                        "value": "Please select"
+                    },
+                    {
+                        "key": "Justification (Cases Without Guarantee):",
+                        "value": "Justification (Cases Without Guarantee):"
+                    },
+                    {
+                        "key": "Reason For Request:",
+                        "value": "Reason For Request:"
+                    },
+                    {
+                        "key": "Advance For Purchase Of:",
+                        "value": "Advance For Purchase Of:"
+                    },
+                    {
+                        "key": "Specify:",
+                        "value": "Specify:"
+                    },
+                    {
+                        "key": "(others)",
+                        "value": "(others)"
+                    },
+                    {
+                        "key": "Destination:",
+                        "value": "Destination:"
+                    },
+                    {
+                        "key": "2) Advance To International Suppliers",
+                        "value": "2) Advance To International Suppliers"
+                    },
+                    {
+                        "key": "Order/Contract No.:",
+                        "value": "Order/Contract No.:"
+                    },
+                    {
+                        "key": "Modality:",
+                        "value": "Modality:"
+                    },
+                    {
+                        "key": "Currency:",
+                        "value": "Currency:"
+                    },
+                    {
+                        "key": "INCOTERM:",
+                        "value": "INCOTERM:"
+                    },
+                    {
+                        "key": "Shipment Date:",
+                        "value": "Shipment Date:"
+                    },
+                    {
+                        "key": "Modelo: dd/mm/aaaa",
+                        "value": "Format: dd/mm/yyyy"
+                    },
+                    {
+                        "key": "Invoice No. (Proforma):",
+                        "value": "Invoice No. (Proforma):"
+                    },
+                    {
+                        "key": "Case No.:",
+                        "value": "Case No.:"
+                    },
+                    {
+                        "key": "NCM Of Merchandise:",
+                        "value": "NCM Of Merchandise:"
+                    },
+                    {
+                        "key": "Which?:",
+                        "value": "Which?:"
+                    },
+                    {
+                        "key": "Specify (Others):",
+                        "value": "Specify (Others):"
+                    },
+                    {
+                        "key": "Attachment",
+                        "value": "Attachment"
+                    },
+                    {
+                        "key": "No more than 15MB",
+                        "value": "No more than 15MB"
+                    },
+                    {
+                        "key": "Size",
+                        "value": "Size"
+                    },
+                    {
+                        "key": "File Name",
+                        "value": "File Name"
+                    },
+                    {
+                        "key": "Drop files to attach,",
+                        "value": "Drop files to attach,"
+                    },
+                    {
+                        "key": "Browse Files",
+                        "value": "Browse Files"
+                    },
+                    {
+                        "key": "Summary",
+                        "value": "Summary"
+                    },
+                    {
+                        "key": "Validate",
+                        "value": "Validate"
+                    },
+                    {
+                        "key": "Admin On Approver Edit",
+                        "value": "Admin On Approver Edit"
+                    },
+                    {
+                        "key": "ADMIN_Sys Attachment Auth",
+                        "value": "ADMIN_Sys Attachment Auth"
+                    },
+                    {
+                        "key": "ADMIN_Field",
+                        "value": "ADMIN_Field"
+                    },
+                    {
+                        "key": "ADMIN_Files",
+                        "value": "ADMIN_Files"
+                    },
+                    {
+                        "key": "ADMIN_File",
+                        "value": "ADMIN_File"
+                    },
+                    {
+                        "key": "ADMIN_Author NTID",
+                        "value": "ADMIN_Author NTID"
+                    },
+                    {
+                        "key": "ADMIN_Author Name",
+                        "value": "ADMIN_Author Name"
+                    },
+                    {
+                        "key": "HTML-NATIONAL-NOTE",
+                        "value": "<td width=\"33%\" valign=\"top\" colspan=\"3\">           <p><b>Remarks:</b></p><p>  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Attach to this request all documents required in reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Cases with guarantee: Attach the documentation specified in reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Approvals according to reg.3 and exceptions according to reg.10</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► In case of lack of guarantee, RBLA/P approval is mandatory, </p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► The payment condition of the order must be:</p> <p><b></b></p><li><b>009 E for \"Advance\" payment</b><p></p>  <p><b>Important:</b> If the conditions in the order/contract/guarantee are not in accordance with the information above, the WorkON will be rejected.</p>         </li></td>"
+                    },
+                    {
+                        "key": "HTML-INTERNATIONAL-NOTE",
+                        "value": "<td width=\"33%\" valign=\"top\" colspan=\"3\">           <p><b>Remarks:</b></p><p>  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Attach to this request all documents required in reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Cases with guarantee: Attach the documentation specified in reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Approvals according to reg.3 and exceptions according to reg.10</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► In case of lack of guarantee, RBLA/P approval is mandatory,</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► The payment condition of the order must be:</p> <p><b></b></p><li><b>1210 for \"Cash\" payment</b><p></p> <p><b></b></p></li><li><b>1100 for \"Advance\" payment</b><p></p> <p><b>Important:</b> If the conditions in the order/contract/guarantee are not in accordance with the information above, the WorkON will be rejected.</p>         </li></td>"
+                    },
+                    {
+                        "key": "Privacy Note",
+                        "value": "<a href=\"https://inside-ws.bosch.com/FIRSTspiritWeb/permlink/wcms_corpfunc_-transparency_1-EN\" target=\"_blank\">Privacy Note</a>"
+                    },
+                    {
+                        "key": "unsavedRowsError",
+                        "value": "Please save all rows before proceeding."
+                    },
+                    {
+                        "key": "invalidRowsError",
+                        "value": "Please correct invalid rows before proceeding."
+                    },
+                    {
+                        "key": "invalidRowError",
+                        "value": "Invalid row. Please correct it or delete."
+                    },
+                    {
+                        "key": "invalidOption",
+                        "value": "{{field}} is an invalid value."
+                    },
+                    {
+                        "key": "invalidDay",
+                        "value": "{{field}} is not a valid day."
+                    },
+                    {
+                        "key": "alertMessageWithLabel",
+                        "value": "{{label}}: {{message}}"
+                    },
+                    {
+                        "key": "alertMessage",
+                        "value": "{{message}}"
+                    },
+                    {
+                        "key": "complete",
+                        "value": "Submission Complete"
+                    },
+                    {
+                        "key": "error",
+                        "value": "Please fix the following errors before submitting."
+                    },
+                    {
+                        "key": "errorListHotkey",
+                        "value": "Press Ctrl + Alt + X to go back to the error list."
+                    },
+                    {
+                        "key": "errorsListNavigationMessage",
+                        "value": "Click to navigate to the field with following error."
+                    },
+                    {
+                        "key": "submitError",
+                        "value": "Please check the form and correct all errors before submitting."
+                    },
+                    {
+                        "key": "required",
+                        "value": "{{field}} is required"
+                    },
+                    {
+                        "key": "unique",
+                        "value": "{{field}} must be unique"
+                    },
+                    {
+                        "key": "array",
+                        "value": "{{field}} must be an array"
+                    },
+                    {
+                        "key": "array_nonempty",
+                        "value": "{{field}} must be a non-empty array"
+                    },
+                    {
+                        "key": "nonarray",
+                        "value": "{{field}} must not be an array"
+                    },
+                    {
+                        "key": "select",
+                        "value": "{{field}} contains an invalid selection"
+                    },
+                    {
+                        "key": "pattern",
+                        "value": "{{field}} does not match the pattern {{pattern}}"
+                    },
+                    {
+                        "key": "minLength",
+                        "value": "{{field}} must have at least {{length}} characters."
+                    },
+                    {
+                        "key": "maxLength",
+                        "value": "{{field}} must have no more than {{length}} characters."
+                    },
+                    {
+                        "key": "minWords",
+                        "value": "{{field}} must have at least {{length}} words."
+                    },
+                    {
+                        "key": "maxWords",
+                        "value": "{{field}} must have no more than {{length}} words."
+                    },
+                    {
+                        "key": "min",
+                        "value": "{{field}} cannot be less than {{min}}."
+                    },
+                    {
+                        "key": "max",
+                        "value": "{{field}} cannot be greater than {{max}}."
+                    },
+                    {
+                        "key": "maxDate",
+                        "value": "{{field}} should not contain date after {{maxDate}}"
+                    },
+                    {
+                        "key": "minDate",
+                        "value": "{{field}} should not contain date before {{minDate}}"
+                    },
+                    {
+                        "key": "maxYear",
+                        "value": "{{field}} should not contain year greater than {{maxYear}}"
+                    },
+                    {
+                        "key": "minYear",
+                        "value": "{{field}} should not contain year less than {{minYear}}"
+                    },
+                    {
+                        "key": "minSelectedCount",
+                        "value": "You must select at least {{minCount}} items"
+                    },
+                    {
+                        "key": "maxSelectedCount",
+                        "value": "You may only select up to {{maxCount}} items"
+                    },
+                    {
+                        "key": "invalid_email",
+                        "value": "{{field}} must be a valid email."
+                    },
+                    {
+                        "key": "invalid_url",
+                        "value": "{{field}} must be a valid url."
+                    },
+                    {
+                        "key": "invalid_regex",
+                        "value": "{{field}} does not match the pattern {{regex}}."
+                    },
+                    {
+                        "key": "invalid_date",
+                        "value": "{{field}} is not a valid date."
+                    },
+                    {
+                        "key": "invalid_day",
+                        "value": "{{field}} is not a valid day."
+                    },
+                    {
+                        "key": "invalidValueProperty",
+                        "value": "Invalid Value Property"
+                    },
+                    {
+                        "key": "mask",
+                        "value": "{{field}} does not match the mask."
+                    },
+                    {
+                        "key": "valueIsNotAvailable",
+                        "value": "{{ field }} is an invalid value."
+                    },
+                    {
+                        "key": "stripe",
+                        "value": "{{stripe}}"
+                    },
+                    {
+                        "key": "month",
+                        "value": "Month"
+                    },
+                    {
+                        "key": "day",
+                        "value": "Day"
+                    },
+                    {
+                        "key": "year",
+                        "value": "Year"
+                    },
+                    {
+                        "key": "january",
+                        "value": "January"
+                    },
+                    {
+                        "key": "february",
+                        "value": "February"
+                    },
+                    {
+                        "key": "march",
+                        "value": "March"
+                    },
+                    {
+                        "key": "april",
+                        "value": "April"
+                    },
+                    {
+                        "key": "may",
+                        "value": "May"
+                    },
+                    {
+                        "key": "june",
+                        "value": "June"
+                    },
+                    {
+                        "key": "july",
+                        "value": "July"
+                    },
+                    {
+                        "key": "august",
+                        "value": "August"
+                    },
+                    {
+                        "key": "september",
+                        "value": "September"
+                    },
+                    {
+                        "key": "october",
+                        "value": "October"
+                    },
+                    {
+                        "key": "november",
+                        "value": "November"
+                    },
+                    {
+                        "key": "december",
+                        "value": "December"
+                    },
+                    {
+                        "key": "next",
+                        "value": "Next"
+                    },
+                    {
+                        "key": "previous",
+                        "value": "Previous"
+                    },
+                    {
+                        "key": "cancel",
+                        "value": "Cancel"
+                    },
+                    {
+                        "key": "submit",
+                        "value": "Submit Form"
+                    },
+                    {
+                        "key": "confirmCancel",
+                        "value": "Are you sure you want to cancel?"
+                    },
+                    {
+                        "key": "saveDraftInstanceError",
+                        "value": "Cannot save draft because there is no formio instance."
+                    },
+                    {
+                        "key": "saveDraftAuthError",
+                        "value": "Cannot save draft unless a user is authenticated."
+                    },
+                    {
+                        "key": "restoreDraftInstanceError",
+                        "value": "Cannot restore draft because there is no formio instance."
+                    },
+                    {
+                        "key": "saveDraftError",
+                        "value": "Unable to save draft."
+                    },
+                    {
+                        "key": "restoreDraftError",
+                        "value": "Unable to restore draft."
+                    },
+                    {
+                        "key": "time",
+                        "value": "Invalid time"
+                    },
+                    {
+                        "key": "cancelButtonAriaLabel",
+                        "value": "Cancel button. Click to reset the form"
+                    },
+                    {
+                        "key": "previousButtonAriaLabel",
+                        "value": "Previous button. Click to go back to the previous tab"
+                    },
+                    {
+                        "key": "nextButtonAriaLabel",
+                        "value": "Next button. Click to go to the next tab"
+                    },
+                    {
+                        "key": "submitButtonAriaLabel",
+                        "value": "Submit Form button. Click to submit the form"
+                    },
+                    {
+                        "key": "reCaptchaTokenValidationError",
+                        "value": "ReCAPTCHA: Token validation error"
+                    },
+                    {
+                        "key": "reCaptchaTokenNotSpecifiedError",
+                        "value": "ReCAPTCHA: Token is not specified in submission"
+                    },
+                    {
+                        "key": "apiKey",
+                        "value": "API Key is not unique: {{key}}"
+                    },
+                    {
+                        "key": "typeRemaining",
+                        "value": "{{ remaining }} {{ type }} remaining."
+                    },
+                    {
+                        "key": "typeCount",
+                        "value": "{{ count }} {{ type }}"
+                    },
+                    {
+                        "key": "requiredDayField",
+                        "value": "{{ field }} is required"
+                    },
+                    {
+                        "key": "requiredDayEmpty",
+                        "value": "{{ field }} is required"
+                    },
+                    {
+                        "key": "requiredMonthField",
+                        "value": "{{ field }} is required"
+                    },
+                    {
+                        "key": "requiredYearField",
+                        "value": "{{ field }} is required"
+                    }
+                ]
+            },
+            {
+                "language_code": "pt",
+                "is_default": true,
+                "translation": [
+                    {
+                        "key": "Warranty Insurance",
+                        "value": "Seguro Garantia"
+                    },
+                    {
+                        "key": "Promissory Note",
+                        "value": "Nota Promissória"
+                    },
+                    {
+                        "key": "Letter of Guarantee",
+                        "value": "Carta Fiança"
+                    },
+                    {
+                        "key": "Client Tooling = C",
+                        "value": "Ferramental cliente = C"
+                    },
+                    {
+                        "key": "Other Services = M",
+                        "value": "Outros Serviços = M"
+                    },
+                    {
+                        "key": "Intangible Asset = A",
+                        "value": "Ativo Intangível = A"
+                    },
+                    {
+                        "key": "Inventory = V",
+                        "value": "Estoque = V"
+                    },
+                    {
+                        "key": "Tangible Asset = B",
+                        "value": "Ativo Tangível = B"
+                    },
+                    {
+                        "key": "PABR",
+                        "value": "PABR"
+                    },
+                    {
+                        "key": "CaP2",
+                        "value": "CaP2"
+                    },
+                    {
+                        "key": "JvL",
+                        "value": "JvL"
+                    },
+                    {
+                        "key": "CaP1",
+                        "value": "CaP1"
+                    },
+                    {
+                        "key": "CtP",
+                        "value": "CtP"
+                    },
+                    {
+                        "key": "ArP",
+                        "value": "ArP"
+                    },
+                    {
+                        "key": "Sight Draft - Shipping Document Available",
+                        "value": "A vista - há documento de embarque"
+                    },
+                    {
+                        "key": "Advance - No Shipping Document",
+                        "value": "Antecipado - não há documento de embarque"
+                    },
+                    {
+                        "key": "Guarantee Insurance",
+                        "value": "Seguro Garantia"
+                    },
+                    {
+                        "key": "Letter of Credit",
+                        "value": "Carta de Crédito"
+                    },
+                    {
+                        "key": "General Data",
+                        "value": "Dados Gerais"
+                    },
+                    {
+                        "key": "National Suppliers",
+                        "value": "Fornecedores Nacionais"
+                    },
+                    {
+                        "key": "International Suppliers",
+                        "value": "Fornecedores Internacionais"
+                    },
+                    {
+                        "key": "Attachments",
+                        "value": "Anexos"
+                    },
+                    {
+                        "key": "Admin",
+                        "value": "Admin"
+                    },
+                    {
+                        "key": "Supplier Name:",
+                        "value": "Nome Fornecedor:"
+                    },
+                    {
+                        "key": "SAP No.:",
+                        "value": "Nº SAP:"
+                    },
+                    {
+                        "key": "Division And Business Location:",
+                        "value": "Divisão e Local de Negócio:"
+                    },
+                    {
+                        "key": "Ex: 9081/6171, 9082/6832",
+                        "value": "Ex: 9081/6171, 9082/6832"
+                    },
+                    {
+                        "key": "Payment Date:",
+                        "value": "Data de Pagamento:"
+                    },
+                    {
+                        "key": "(dd/mm/aaaa)",
+                        "value": "(dd/mm/aaaa)"
+                    },
+                    {
+                        "key": "Requester:",
+                        "value": "Requisitante:"
+                    },
+                    {
+                        "key": "Extension:",
+                        "value": "Ramal:"
+                    },
+                    {
+                        "key": "Requester Manager:",
+                        "value": "Gestor do requisitante:"
+                    },
+                    {
+                        "key": "Department:",
+                        "value": "Departamento:"
+                    },
+                    {
+                        "key": "Advance Expiration:",
+                        "value": "Venc. Adiantamento:"
+                    },
+                    {
+                        "key": "1) Advance To National Suppliers",
+                        "value": "1) Adiantamento a Fornecedores Nacionais"
+                    },
+                    {
+                        "key": "Order No.:",
+                        "value": "Nº Pedido:"
+                    },
+                    {
+                        "key": "Total Value:",
+                        "value": "Valor Total:"
+                    },
+                    {
+                        "key": "% Of Advance:",
+                        "value": "% do Adto:"
+                    },
+                    {
+                        "key": "Advance Value:",
+                        "value": "Valor do Adto:"
+                    },
+                    {
+                        "key": "Guarantee:",
+                        "value": "Garantia:"
+                    },
+                    {
+                        "key": "Yes",
+                        "value": "Sim"
+                    },
+                    {
+                        "key": "No",
+                        "value": "Não"
+                    },
+                    {
+                        "key": "Which?",
+                        "value": "Qual?"
+                    },
+                    {
+                        "key": "Please select",
+                        "value": "Por favor, selecione"
+                    },
+                    {
+                        "key": "Justification (Cases Without Guarantee):",
+                        "value": "Justificativa (casos sem garantia):"
+                    },
+                    {
+                        "key": "Reason For Request:",
+                        "value": "Motivo da Solicitação:"
+                    },
+                    {
+                        "key": "Advance For Purchase Of:",
+                        "value": "Adto para compra de:"
+                    },
+                    {
+                        "key": "Specify:",
+                        "value": "Especificar:"
+                    },
+                    {
+                        "key": "(others)",
+                        "value": "(outros)"
+                    },
+                    {
+                        "key": "Destination:",
+                        "value": "Destino:"
+                    },
+                    {
+                        "key": "2) Advance To International Suppliers",
+                        "value": "2) Adiantamento a Fornecedores Internacionais"
+                    },
+                    {
+                        "key": "Order/Contract No.:",
+                        "value": "Nº Pedido/Contrato:"
+                    },
+                    {
+                        "key": "Modality:",
+                        "value": "Modalidade:"
+                    },
+                    {
+                        "key": "Currency:",
+                        "value": "Moeda:"
+                    },
+                    {
+                        "key": "INCOTERM:",
+                        "value": "INCOTERM:"
+                    },
+                    {
+                        "key": "Shipment Date:",
+                        "value": "Data de Embarque:"
+                    },
+                    {
+                        "key": "Modelo: dd/mm/aaaa",
+                        "value": "Modelo: dd/mm/aaaa"
+                    },
+                    {
+                        "key": "Invoice No. (Proforma):",
+                        "value": "Nº Invoice (Proforma):"
+                    },
+                    {
+                        "key": "Case No.:",
+                        "value": "Nº Caso:"
+                    },
+                    {
+                        "key": "NCM Of Merchandise:",
+                        "value": "NCM da mercadoria:"
+                    },
+                    {
+                        "key": "Which?:",
+                        "value": "Qual?:"
+                    },
+                    {
+                        "key": "Specify (Others):",
+                        "value": "Especificar (outros):"
+                    },
+                    {
+                        "key": "Attachment",
+                        "value": "Anexos"
+                    },
+                    {
+                        "key": "No more than 15MB",
+                        "value": "No máximo 15 MB"
+                    },
+                    {
+                        "key": "Size",
+                        "value": "Tamanho"
+                    },
+                    {
+                        "key": "File Name",
+                        "value": "Nome do arquivo"
+                    },
+                    {
+                        "key": "Drop files to attach,",
+                        "value": "Solte os arquivos para anexar,"
+                    },
+                    {
+                        "key": "Browse Files",
+                        "value": "Procurar arquivos"
+                    },
+                    {
+                        "key": "Summary",
+                        "value": "Summary"
+                    },
+                    {
+                        "key": "Validate",
+                        "value": "Validate"
+                    },
+                    {
+                        "key": "Admin On Approver Edit",
+                        "value": "Admin On Approver Edit"
+                    },
+                    {
+                        "key": "ADMIN_Sys Attachment Auth",
+                        "value": "ADMIN_Sys Attachment Auth"
+                    },
+                    {
+                        "key": "ADMIN_Field",
+                        "value": "ADMIN_Field"
+                    },
+                    {
+                        "key": "ADMIN_Files",
+                        "value": "ADMIN_Files"
+                    },
+                    {
+                        "key": "ADMIN_File",
+                        "value": "ADMIN_File"
+                    },
+                    {
+                        "key": "ADMIN_Author NTID",
+                        "value": "ADMIN_Author NTID"
+                    },
+                    {
+                        "key": "ADMIN_Author Name",
+                        "value": "ADMIN_Author Name"
+                    },
+                    {
+                        "key": "HTML-NATIONAL-NOTE",
+                        "value": "<td width=\"33%\" valign=\"top\" colspan=\"3\">           <p><b>Observações:</b></p><p>  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Anexar a esta solicitação todos os   documentos exigidos no reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Casos com garantia: Anexar documentação   especificada no reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Aprovações de acordo com reg.3 e   exceções conforme reg.10</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Em caso de falta de garantia a   aprovação de RBLA/P é obrigatória, </p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► A condição de pagamento do pedido deve   ser:</p> <p><b></b></p><li><b>009 E para pagamento \"Antecipado\"</b><p></p>  <p><b>Importante:</b> Se as condições no pedido/contrato/garantia não estiverem de acordo com as informações acima, p WorkON será  reprovado.</p>         </li></td>"
+                    },
+                    {
+                        "key": "HTML-INTERNATIONAL-NOTE",
+                        "value": "<td width=\"33%\" valign=\"top\" colspan=\"3\">           <p><b>Observações:</b></p><p>  </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Anexar a esta solicitação todos os   documentos exigidos no reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Casos com garantia: Anexar documentação   especificada no reg.10.</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Aprovações de acordo com reg.3 e   exceções conforme reg.10</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► Em caso de falta de garantia a   aprovação de RBLA/P é obrigatória,</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;► A condição de pagamento do pedido deve   ser:</p> <p><b></b></p><li><b>1210 para pagamento \"À vista\"</b><p></p> <p><b></b></p></li><li><b>1100 para pagamento \"Antecipado\"</b><p></p> <p><b>Importante:</b> Se as condições no pedido/contrato/garantia não estiverem de acordo com as informações acima, o WorkON será reprovado.</p>         </li></td>"
+                    },
+                    {
+                        "key": "Privacy Note",
+                        "value": "<a style=\"text-decoration: underline\" href=\"https://inside-ws.bosch.com/FIRSTspiritWeb/permlink/wcms_corpfunc_-transparency_1-EN\" target=\"_blank\" title=\"Click Here to View Privacy Note\">Nota de Privacidade</a>"
+                    },
+                    {
+                        "key": "unsavedRowsError",
+                        "value": "Please save all rows before proceeding."
+                    },
+                    {
+                        "key": "invalidRowsError",
+                        "value": "Please correct invalid rows before proceeding."
+                    },
+                    {
+                        "key": "invalidRowError",
+                        "value": "Invalid row. Please correct it or delete."
+                    },
+                    {
+                        "key": "invalidOption",
+                        "value": "{{field}} is an invalid value."
+                    },
+                    {
+                        "key": "invalidDay",
+                        "value": "{{field}} is not a valid day."
+                    },
+                    {
+                        "key": "alertMessageWithLabel",
+                        "value": "{{label}}: {{message}}"
+                    },
+                    {
+                        "key": "alertMessage",
+                        "value": "{{message}}"
+                    },
+                    {
+                        "key": "complete",
+                        "value": "Submission Complete"
+                    },
+                    {
+                        "key": "error",
+                        "value": "Please fix the following errors before submitting."
+                    },
+                    {
+                        "key": "errorListHotkey",
+                        "value": "Press Ctrl + Alt + X to go back to the error list."
+                    },
+                    {
+                        "key": "errorsListNavigationMessage",
+                        "value": "Click to navigate to the field with following error."
+                    },
+                    {
+                        "key": "submitError",
+                        "value": "Please check the form and correct all errors before submitting."
+                    },
+                    {
+                        "key": "required",
+                        "value": "{{field}} é obrigatório"
+                    },
+                    {
+                        "key": "unique",
+                        "value": "{{field}} must be unique"
+                    },
+                    {
+                        "key": "array",
+                        "value": "{{field}} must be an array"
+                    },
+                    {
+                        "key": "array_nonempty",
+                        "value": "{{field}} must be a non-empty array"
+                    },
+                    {
+                        "key": "nonarray",
+                        "value": "{{field}} must not be an array"
+                    },
+                    {
+                        "key": "select",
+                        "value": "{{field}} contains an invalid selection"
+                    },
+                    {
+                        "key": "pattern",
+                        "value": "{{field}} does not match the pattern {{pattern}}"
+                    },
+                    {
+                        "key": "minLength",
+                        "value": "{{field}} must have at least {{length}} characters."
+                    },
+                    {
+                        "key": "maxLength",
+                        "value": "{{field}} must have no more than {{length}} characters."
+                    },
+                    {
+                        "key": "minWords",
+                        "value": "{{field}} must have at least {{length}} words."
+                    },
+                    {
+                        "key": "maxWords",
+                        "value": "{{field}} must have no more than {{length}} words."
+                    },
+                    {
+                        "key": "min",
+                        "value": "{{field}} cannot be less than {{min}}."
+                    },
+                    {
+                        "key": "max",
+                        "value": "{{field}} cannot be greater than {{max}}."
+                    },
+                    {
+                        "key": "maxDate",
+                        "value": "{{field}} should not contain date after {{maxDate}}"
+                    },
+                    {
+                        "key": "minDate",
+                        "value": "{{field}} should not contain date before {{minDate}}"
+                    },
+                    {
+                        "key": "maxYear",
+                        "value": "{{field}} should not contain year greater than {{maxYear}}"
+                    },
+                    {
+                        "key": "minYear",
+                        "value": "{{field}} should not contain year less than {{minYear}}"
+                    },
+                    {
+                        "key": "minSelectedCount",
+                        "value": "You must select at least {{minCount}} items"
+                    },
+                    {
+                        "key": "maxSelectedCount",
+                        "value": "You may only select up to {{maxCount}} items"
+                    },
+                    {
+                        "key": "invalid_email",
+                        "value": "{{field}} must be a valid email."
+                    },
+                    {
+                        "key": "invalid_url",
+                        "value": "{{field}} must be a valid url."
+                    },
+                    {
+                        "key": "invalid_regex",
+                        "value": "{{field}} does not match the pattern {{regex}}."
+                    },
+                    {
+                        "key": "invalid_date",
+                        "value": "{{field}} is not a valid date."
+                    },
+                    {
+                        "key": "invalid_day",
+                        "value": "{{field}} is not a valid day."
+                    },
+                    {
+                        "key": "invalidValueProperty",
+                        "value": "Invalid Value Property"
+                    },
+                    {
+                        "key": "mask",
+                        "value": "{{field}} does not match the mask."
+                    },
+                    {
+                        "key": "valueIsNotAvailable",
+                        "value": "{{ field }} is an invalid value."
+                    },
+                    {
+                        "key": "stripe",
+                        "value": "{{stripe}}"
+                    },
+                    {
+                        "key": "month",
+                        "value": "Month"
+                    },
+                    {
+                        "key": "day",
+                        "value": "Day"
+                    },
+                    {
+                        "key": "year",
+                        "value": "Year"
+                    },
+                    {
+                        "key": "january",
+                        "value": "January"
+                    },
+                    {
+                        "key": "february",
+                        "value": "February"
+                    },
+                    {
+                        "key": "march",
+                        "value": "March"
+                    },
+                    {
+                        "key": "april",
+                        "value": "April"
+                    },
+                    {
+                        "key": "may",
+                        "value": "May"
+                    },
+                    {
+                        "key": "june",
+                        "value": "June"
+                    },
+                    {
+                        "key": "july",
+                        "value": "July"
+                    },
+                    {
+                        "key": "august",
+                        "value": "August"
+                    },
+                    {
+                        "key": "september",
+                        "value": "September"
+                    },
+                    {
+                        "key": "october",
+                        "value": "October"
+                    },
+                    {
+                        "key": "november",
+                        "value": "November"
+                    },
+                    {
+                        "key": "december",
+                        "value": "December"
+                    },
+                    {
+                        "key": "next",
+                        "value": "Next"
+                    },
+                    {
+                        "key": "previous",
+                        "value": "Previous"
+                    },
+                    {
+                        "key": "cancel",
+                        "value": "Cancel"
+                    },
+                    {
+                        "key": "submit",
+                        "value": "Submit Form"
+                    },
+                    {
+                        "key": "confirmCancel",
+                        "value": "Are you sure you want to cancel?"
+                    },
+                    {
+                        "key": "saveDraftInstanceError",
+                        "value": "Cannot save draft because there is no formio instance."
+                    },
+                    {
+                        "key": "saveDraftAuthError",
+                        "value": "Cannot save draft unless a user is authenticated."
+                    },
+                    {
+                        "key": "restoreDraftInstanceError",
+                        "value": "Cannot restore draft because there is no formio instance."
+                    },
+                    {
+                        "key": "saveDraftError",
+                        "value": "Unable to save draft."
+                    },
+                    {
+                        "key": "restoreDraftError",
+                        "value": "Unable to restore draft."
+                    },
+                    {
+                        "key": "time",
+                        "value": "Invalid time"
+                    },
+                    {
+                        "key": "cancelButtonAriaLabel",
+                        "value": "Cancel button. Click to reset the form"
+                    },
+                    {
+                        "key": "previousButtonAriaLabel",
+                        "value": "Previous button. Click to go back to the previous tab"
+                    },
+                    {
+                        "key": "nextButtonAriaLabel",
+                        "value": "Next button. Click to go to the next tab"
+                    },
+                    {
+                        "key": "submitButtonAriaLabel",
+                        "value": "Submit Form button. Click to submit the form"
+                    },
+                    {
+                        "key": "reCaptchaTokenValidationError",
+                        "value": "ReCAPTCHA: Token validation error"
+                    },
+                    {
+                        "key": "reCaptchaTokenNotSpecifiedError",
+                        "value": "ReCAPTCHA: Token is not specified in submission"
+                    },
+                    {
+                        "key": "apiKey",
+                        "value": "API Key is not unique: {{key}}"
+                    },
+                    {
+                        "key": "typeRemaining",
+                        "value": "{{ remaining }} {{ type }} remaining."
+                    },
+                    {
+                        "key": "typeCount",
+                        "value": "{{ count }} {{ type }}"
+                    },
+                    {
+                        "key": "requiredDayField",
+                        "value": "{{ field }} é obrigatório"
+                    },
+                    {
+                        "key": "requiredDayEmpty",
+                        "value": "{{ field }} is required"
+                    },
+                    {
+                        "key": "requiredMonthField",
+                        "value": "{{ field }} is required"
+                    },
+                    {
+                        "key": "requiredYearField",
+                        "value": "{{ field }} is required"
+                    }
+                ]
+            }
+        ]
+    }
+}
