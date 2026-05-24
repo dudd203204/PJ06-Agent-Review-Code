@@ -1,0 +1,118 @@
+{
+  "file_name": "input_formio_example.json",
+  "route": "route_a",
+  "route_match": {
+    "route": "route_a",
+    "pattern": "^input_formio.*\\.json$"
+  },
+  "workflow": "generic_review",
+  "overall_status": "failed",
+  "checks": [
+    {
+      "skill_id": "component_quality",
+      "criterion": "component_quality",
+      "status": "failed",
+      "reason": "Failed checks: A1, A2, A3",
+      "locations": [],
+      "evidence": {
+        "A1": {
+          "Status": "FAILED",
+          "Note / Feedback": "Found 10 naming violations:\nLine 0012: Component \"General Data\" has key=\"generalData\" \u2192 should be \"generaldata\".\nLine 0036: Component \"Columns\" has key=\"columns\" \u2192 should be \"columns1\".\nLine 0136: Component \"Columns\" has key=\"columns1\" \u2192 should be \"columns2\".\nLine 0185: Component \"Columns\" has key=\"columns2\" \u2192 should be \"columns3\".\nLine 0234: Component \"Columns\" has key=\"columns3\" \u2192 should be \"columns4\".\nLine 0302: Component \"National Suppliers\" has key=\"nationalSuppliers\" \u2192 should be \"nationalSuppliers1\".\nLine 0336: Component \"Order No.:\" has key=\"orderNo\" \u2192 should be \"orderNo1\".\nLine 0399: Component \"Total Value:\" has key=\"totalValue\" \u2192 should be \"totalValue1\".\nLine 0470: Component \"% Of Advance:\" has key=\"ofAdvance\" \u2192 should be \"ofAdvance1\".\nLine 0549: Component \"Advance Value:\" has key=\"advanceValue\" \u2192 should be \"advanceValue1\"."
+        },
+        "A2": {
+          "Status": "FAILED",
+          "Note / Feedback": "Found 10 auto-generated keys:\nLine 0036: Component \"Columns\" has key=\"columns\" \u2192 should be \"columns1\".\nLine 0136: Component \"Columns\" has key=\"columns1\" \u2192 should be \"columns2\".\nLine 0185: Component \"Columns\" has key=\"columns2\" \u2192 should be \"columns3\".\nLine 0234: Component \"Columns\" has key=\"columns3\" \u2192 should be \"columns4\".\nLine 0302: Component \"National Suppliers\" has key=\"nationalSuppliers\" \u2192 should be \"nationalSuppliers1\".\nLine 0336: Component \"Order No.:\" has key=\"orderNo\" \u2192 should be \"orderNo1\".\nLine 0399: Component \"Total Value:\" has key=\"totalValue\" \u2192 should be \"totalValue1\".\nLine 0470: Component \"% Of Advance:\" has key=\"ofAdvance\" \u2192 should be \"ofAdvance1\".\nLine 0549: Component \"Advance Value:\" has key=\"advanceValue\" \u2192 should be \"advanceValue1\".\nLine 0621: Component \"Guarantee:\" has key=\"guarantee\" \u2192 should be \"guarantee1\"."
+        },
+        "A3": {
+          "Status": "FAILED",
+          "Note / Feedback": "Found 1 admin component without prefix:\nLine 2766: Panel \"Admin\" -> component \"label\" = \"Admin On Approver Edit\" does not use the required prefix. Recommended \"label\" = \"ADMIN_Admin On Approver Edit\"."
+        }
+      }
+    },
+    {
+      "skill_id": "form_structure_quality",
+      "criterion": "form_structure_quality",
+      "status": "failed",
+      "reason": "Failed checks: C4",
+      "locations": [],
+      "evidence": {
+        "C1": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked all columns components. Each column contains only one direct child component. PASSED."
+        },
+        "C2": {
+          "Status": "PASSED",
+          "Note / Feedback": "The form object root has all three required attributes: key = \"main\", type = \"well\", customClass = \"main-wrapper\". PASSED."
+        },
+        "C3": {
+          "Status": "PASSED",
+          "Note / Feedback": "The form contains an attachment component (line 2690) and the required 'ADMIN_Sys Attachment Auth' component (line 2789) is present within the 'Admin' panel (line 2756). PASSED."
+        },
+        "C4": {
+          "Status": "FAILED",
+          "Note / Feedback": "Component 'Order No.:' (line 0321) uses a calculateValue to set a default value when the field is disabled. This can be simplified by using a customDefaultValue or by relying on the logic to handle the initial state. The logic for enabling/disabling fields (lines 0324-0377) is also quite verbose for simple property changes. Suggestion: Simplify logic for enabling/disabling fields and consider customDefaultValue for initial states where applicable."
+        },
+        "C5": {
+          "Status": "PASSED",
+          "Note / Feedback": "The form structure is well-organized with logical nesting. No excessive multi-level nesting was detected. PASSED."
+        },
+        "C6": {
+          "Status": "PASSED",
+          "Note / Feedback": "The form logic appears to be implemented directly within components. While there is repetition in the logic for enabling/disabling fields, it's not at a scale that necessitates utility functions for this specific form. PASSED."
+        },
+        "C7": {
+          "Status": "PASSED",
+          "Note / Feedback": "A component with key = \"summary\" was found on line 0733. PASSED."
+        }
+      }
+    },
+    {
+      "skill_id": "field_logic_quality",
+      "criterion": "field_logic_quality",
+      "status": "failed",
+      "reason": "Failed checks: B4",
+      "locations": [],
+      "evidence": {
+        "B1": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked all logic and expressions. All appear to safely handle undefined/null values using optional chaining, nullish coalescing, or explicit checks. PASSED."
+        },
+        "B2": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked all calculated value fields. No fields were found that generate text through concatenation without explicit truncation or length limiting. PASSED."
+        },
+        "B3": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked for approver-edit components that should clear values on withdraw/revision. No such components were identified that would retain stale data. PASSED."
+        },
+        "B4": {
+          "Status": "FAILED",
+          "Note / Feedback": "Found 2 violations:\nLine 0026: Component \"Supplier Name:\" has required=true but is nested within a 'columns' component (not a panel) and lacks its own conditional logic. Issue: This component is required but its visibility is not explicitly controlled by a conditional on the panel it resides in, making its required status potentially problematic if the parent panel's visibility changes. Suggestion: Ensure required fields within conditional panels have explicit matching conditions and validateWhenHidden=true, or make them optional if not directly controlled.\nLine 0046: Component \"SAP No.:\" has required=true but is nested within a 'columns' component (not a panel) and lacks its own conditional logic. Issue: Similar to the above, this required field's visibility is not explicitly controlled by a conditional on its parent panel, which can lead to issues if the parent panel's visibility changes. Suggestion: Ensure required fields within conditional panels have explicit matching conditions and validateWhenHidden=true, or make them optional if not directly controlled."
+        }
+      }
+    },
+    {
+      "skill_id": "run_time_quality",
+      "criterion": "run_time_quality",
+      "status": "passed",
+      "reason": "No failed checks found",
+      "locations": [],
+      "evidence": {
+        "D1": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked all components for unsafe calculated display values. No issues found. PASSED."
+        },
+        "D2": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked all executable JavaScript logic for potential runtime errors or Form.io warnings. No issues found. PASSED."
+        },
+        "D3": {
+          "Status": "PASSED",
+          "Note / Feedback": "Checked all executable JavaScript logic for forbidden debug logging statements. No console.log statements found outside of the allowed 'ADMIN_Sys Attachment Auth' component. PASSED."
+        }
+      }
+    }
+  ],
+  "policy_events": [],
+  "errors": []
+}
