@@ -26,7 +26,7 @@
       },
       "B4": {
         "Status": "PASSED or FAILED",
-        "Note / Feedback": "If failed, identify the exact excel_configs.excel_fields array position and value that starts with ADMIN_."
+        "Note / Feedback": "If failed, identify the exact excel_configs.excel_fields array position, the value starting with ADMIN_, and confirm that include_to_report is true."
       },
       "B5": {
         "Status": "PASSED or FAILED",
@@ -99,16 +99,17 @@
     {
       "id": "B4",
       "review_item": "Admin field should be remove from excel report",
-      "description": "Check whether admin fields have been removed from the Excel report.",
-      "goal": "Make sure no field in excel_configs.excel_fields uses a value starting with ADMIN_.",
-      "output_style": "Return PASSED or FAILED. If failed, identify the exact excel_configs.excel_fields array position and invalid value.",
+      "description": "Check whether admin fields have been removed from the Excel report. Admin fields that are not included in the report (include_to_report = false) are acceptable.",
+      "goal": "Make sure no field in excel_configs.excel_fields uses a value starting with ADMIN_ AND has include_to_report set to true.",
+      "output_style": "Return PASSED or FAILED. If failed, identify the exact excel_configs.excel_fields array position, the invalid value starting with ADMIN_, and confirm that include_to_report is true.",
       "procedure": [
         "Locate excel_configs.excel_fields.",
         "Inspect each object inside the excel_fields array.",
-        "For each object, read the value field when present.",
+        "For each object, read the value field and include_to_report field when present.",
         "Ignore objects that do not have a value field unless the JSON structure clearly treats the object as an Excel field mapping.",
-        "Fail if any value starts with ADMIN_.",
-        "Pass if no value in excel_configs.excel_fields starts with ADMIN_."
+        "For each object with a value starting with ADMIN_, check if include_to_report is true.",
+        "Fail only if a value starts with ADMIN_ AND include_to_report is true (or include_to_report is missing, defaulting to true).",
+        "Pass if no value starts with ADMIN_, or if all values starting with ADMIN_ have include_to_report explicitly set to false."
       ],
       "skill": []
     },

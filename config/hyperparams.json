@@ -9,7 +9,8 @@
   },
   "runtime": {
     "max_agent_iterations": 6,
-    "verbose": true
+    "verbose": true,
+    "per_check_execution": true
   },
   "paths": {
     "skill_registry": "skills/skill_registry.json",

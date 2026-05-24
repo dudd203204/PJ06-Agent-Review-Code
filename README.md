@@ -87,12 +87,33 @@ pip install -r requirements.txt
 
 ### 3. Configure environment variables
 
-Copy .env.example to .env and set your API key.
+Copy `.env.example` to `.env` and configure your LLM provider.
+
+#### Option A: OpenAI (Default)
 
 ~~~env
-OPENAI_API_KEY=
-OPENAI_MODEL=gpt-4.1-mini
+LLM_PROVIDER=openai
+OPENAI_API_KEY=sk-proj-...
+OPENAI_MODEL=gpt-4o
 OPENAI_TEMPERATURE=0
+~~~
+
+#### Option B: Custom Provider (Company AI Farm)
+
+~~~env
+LLM_PROVIDER=custom
+CUSTOM_LLM_ENDPOINT=https://aoai-farm.bosch-temp.com
+CUSTOM_LLM_API_KEY=your_api_key
+CUSTOM_LLM_DEPLOYMENT_ID=gpt-4o-mini
+CUSTOM_LLM_API_VERSION=2025-04-01-preview
+CUSTOM_LLM_TEMPERATURE=0
+~~~
+
+**See [CUSTOM_PROVIDER_SETUP.md](CUSTOM_PROVIDER_SETUP.md) for detailed custom provider configuration.**
+
+Other optional variables:
+
+~~~env
 HYPERPARAMS_PATH=./config/hyperparams.json
 SKILL_PATH=./skills
 INPUT_PATH=./input

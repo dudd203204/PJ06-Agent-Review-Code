@@ -6,12 +6,50 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from agents.review_prompt import (
+    build_review_prompt,
+    build_review_prompt_trace_templates,
+)
 from tools.agent_input_trace import build_prompt_trace, update_agent_input_trace_skill
 from tools.review_source import build_numbered_source_text
 from tools.skill_loader import SkillLoadError, load_skill_bundle
 from utils.logger import get_logger
 
 logger = get_logger()
+
+
+def _validate_input_file_size(
+    raw_source_text: str,
+    skillset: Optional[str] = None,
+    skill_name: Optional[str] = None,
+) -> tuple[bool, str]:
+    """
+    IMPROVEMENT #6: Validate input file size before processing.
+    Returns (is_valid, message)
+    
+    Size limits:
+    - form_quality: 50KB (forms are typically small)
+    - back_office_quality: 200KB (backoffice configs can be larger)
+    - default: 100KB
+    """
+    file_size_bytes = len(raw_source_text.encode('utf-8'))
+    file_size_kb = file_size_bytes / 1024
+    
+    # Determine size limit based on skillset
+    if skillset == "form_quality":
+        size_limit_kb = 50
+    elif skillset == "back_office_quality":
+        size_limit_kb = 200
+    else:
+        size_limit_kb = 100
+    
+    if file_size_kb > size_limit_kb:
+        return False, (
+            f"Input file too large: {file_size_kb:.1f}KB (limit: {size_limit_kb}KB) "
+            f"for skillset={skillset or 'default'} skill={skill_name or '?'}"
+        )
+    
+    return True, f"Input file size OK: {file_size_kb:.1f}KB (limit: {size_limit_kb}KB)"
 
 
 @dataclass(frozen=True)
@@ -100,6 +138,40 @@ def build_agent_response_format_schema(*, skill_name: str, response_format: Dict
         "required": required_checks,
         "additionalProperties": False,
     }
+
+
+def _simplify_skill_definition(skill_bundle: Dict[str, Any], simplification_level: int) -> Dict[str, Any]:
+    """
+    IMPROVEMENT #5: Simplify skill definition for retry attempts.
+    Level 0: Original (full)
+    Level 1: Medium (simplified procedures)
+    Level 2: Minimal (just check IDs and names)
+    """
+    simplified = json.loads(json.dumps(skill_bundle))  # Deep copy
+    
+    if simplification_level < 1:
+        return simplified  # Return original
+    
+    # Level 1: Simplify procedures (keep first line only, max 100 chars per check)
+    if simplification_level >= 1:
+        if "checks" in simplified and isinstance(simplified["checks"], list):
+            for check in simplified["checks"]:
+                if "procedure" in check and isinstance(check["procedure"], list):
+                    # Keep only first line of procedure
+                    first_line = check["procedure"][0] if check["procedure"] else ""
+                    check["procedure"] = [first_line[:100]] if first_line else []
+    
+    # Level 2: Minimal (keep only check ID and name)
+    if simplification_level >= 2:
+        if "checks" in simplified and isinstance(simplified["checks"], list):
+            for check in simplified["checks"]:
+                # Keep only id and name, remove procedure details
+                check_id = check.get("id")
+                check_name = check.get("name")
+                # Clear procedure
+                check["procedure"] = [f"Validate {check_name or check_id}"]
+    
+    return simplified
 
 
 def _message_to_agent_dict(message: Any) -> Dict[str, str]:
@@ -199,8 +271,16 @@ def _validate_dynamic_response_payload(payload: Dict[str, Any], response_format:
     for check_id, check_format in response_format.items():
         check_name = str(check_id)
         if check_name not in payload:
-            # LLM omitted this check — no issues found means PASSED
-            payload[check_name] = {"Status": "PASSED", "Note / Feedback": ""}
+            # IMPROVEMENT #2: LLM omitted this check — mark as INCOMPLETE, not PASSED
+            # This prevents false negatives where omitted checks are silently treated as passed
+            logger.warning(
+                "LLM omitted check %s — marking as INCOMPLETE for manual review",
+                check_name
+            )
+            payload[check_name] = {
+                "Status": "INCOMPLETE",
+                "Note / Feedback": "Check not evaluated by LLM — requires manual review"
+            }
             continue
         if not isinstance(payload[check_name], dict):
             # If check value is not a dict, replace with FAILED
@@ -216,19 +296,217 @@ def _validate_dynamic_response_payload(payload: Dict[str, Any], response_format:
             field_key = str(field_name)
             
             # Make "Note / Feedback" optional for PASSED checks
-            # It's only required when Status is FAILED
-            if field_key == "Note / Feedback" and check_status == "PASSED":
+            # It's only required when Status is FAILED or INCOMPLETE
+            if field_key == "Note / Feedback" and check_status in ("PASSED",):
                 continue
             
             if field_key not in payload[check_name]:
                 # Fill in missing field with default value
                 if field_key == "Status":
-                    payload[check_name][field_key] = "FAILED"
+                    payload[check_name][field_key] = "INCOMPLETE"
                 else:
                     payload[check_name][field_key] = ""
             if not isinstance(payload[check_name].get(field_key, ""), str):
                 payload[check_name][field_key] = str(payload[check_name].get(field_key, ""))
     return payload
+
+
+def _validate_feedback_quality(payload: Dict[str, Any]) -> tuple[bool, List[str]]:
+    """
+    IMPROVEMENT #3: Validate feedback quality for all checks.
+    Returns (is_valid, list_of_issues)
+    """
+    issues: List[str] = []
+    
+    for check_id, check_payload in payload.items():
+        if not isinstance(check_payload, dict):
+            continue
+        
+        status = str(check_payload.get("Status", "")).upper()
+        feedback = str(check_payload.get("Note / Feedback", "")).strip()
+        
+        # PASSED checks can have empty feedback
+        if status == "PASSED":
+            continue
+        
+        # FAILED and INCOMPLETE checks MUST have meaningful feedback
+        if status in ("FAILED", "INCOMPLETE"):
+            # Check minimum length
+            if len(feedback) < 15:
+                issues.append(
+                    f"Check {check_id} ({status}): Feedback too brief ({len(feedback)} chars, need ≥15). "
+                    f"Feedback: '{feedback}'"
+                )
+            
+            # For FAILED checks, look for line numbers or specific evidence
+            if status == "FAILED" and "line" not in feedback.lower() and "found" not in feedback.lower():
+                issues.append(
+                    f"Check {check_id} ({status}): Missing line number or specific evidence. "
+                    f"Feedback should include 'Line XXXX' or specific violation locations."
+                )
+    
+    return len(issues) == 0, issues
+
+
+def _validate_response_structure(
+    payload: Dict[str, Any],
+    response_format: Dict[str, Any]
+) -> tuple[bool, List[str]]:
+    """
+    IMPROVEMENT #4: Validate response structure before returning results.
+    Returns (is_valid, list_of_issues)
+    """
+    issues: List[str] = []
+    required_checks = set(str(k) for k in response_format.keys())
+    present_checks = set(str(k) for k in payload.keys() if isinstance(payload.get(k), dict))
+    
+    # Check if all required checks are present
+    missing_checks = required_checks - present_checks
+    if missing_checks:
+        issues.append(f"Missing checks in response: {', '.join(sorted(missing_checks))}")
+    
+    # Check that each check has required fields
+    for check_id in required_checks:
+        check_id_str = str(check_id)
+        if check_id_str not in payload:
+            continue
+        
+        check_payload = payload[check_id_str]
+        if not isinstance(check_payload, dict):
+            issues.append(f"Check {check_id_str}: Not a dictionary")
+            continue
+        
+        # Every check must have Status
+        if "Status" not in check_payload:
+            issues.append(f"Check {check_id_str}: Missing 'Status' field")
+        else:
+            status = str(check_payload.get("Status", "")).upper()
+            if status not in ("PASSED", "FAILED", "INCOMPLETE"):
+                issues.append(
+                    f"Check {check_id_str}: Invalid Status '{status}' "
+                    f"(must be PASSED, FAILED, or INCOMPLETE)"
+                )
+    
+    # Validate feedback quality
+    quality_is_valid, quality_issues = _validate_feedback_quality(payload)
+    if not quality_is_valid:
+        # Log quality issues but don't fail on them (just warnings)
+        for issue in quality_issues:
+            logger.warning("Feedback quality issue: %s", issue)
+    
+    return len(issues) == 0, issues
+
+
+def _invoke_agent_with_retry(
+    agent_executor: Any,
+    llm: Any,
+    prompt: Any,
+    skill_bundle: Dict[str, Any],
+    skillset: Optional[str],
+    prompt_values: Dict[str, Any],
+    messages: Any,
+    response_format: Dict[str, Any],
+    max_agent_iterations: int,
+    skill_name: str,
+) -> Dict[str, Any]:
+    """
+    IMPROVEMENT #5: Invoke agent with retry logic.
+    Attempts 3 times with increasing simplification levels.
+    Returns parsed result or INCOMPLETE status if all attempts fail.
+    """
+    max_retries = 3
+    
+    for attempt in range(max_retries):
+        simplification_level = attempt  # 0, 1, 2
+        
+        if attempt > 0:
+            logger.warning(
+                "Retrying skill=%s with simplification_level=%d (attempt %d/%d)",
+                skill_name,
+                simplification_level,
+                attempt + 1,
+                max_retries,
+            )
+            # Simplify skill definition for retry
+            simplified_skill = _simplify_skill_definition(skill_bundle, simplification_level)
+            # Rebuild prompt values with simplified skill
+            prompt_values["skill_definition"] = json.dumps(simplified_skill, indent=2)
+            # Rebuild prompt with simplified skill
+            prompt = build_review_prompt(
+                skillset=skillset or "default",
+                skill_definition=simplified_skill
+            )
+            # Re-render messages
+            messages = prompt.invoke(prompt_values)
+        
+        try:
+            logger.debug("Invoking agent for skill=%s attempt=%d", skill_name, attempt + 1)
+            agent_raw_output = _invoke_agent(
+                agent_executor=agent_executor,
+                prompt_values=prompt_values,
+                messages=messages,
+                max_agent_iterations=max_agent_iterations,
+            )
+            logger.debug("Agent invocation completed for skill=%s attempt=%d", skill_name, attempt + 1)
+            
+            # Try to parse result
+            result = parse_agent_result(agent_raw_output, response_format)
+            
+            # Validate response structure
+            is_valid, validation_issues = _validate_response_structure(result, response_format)
+            if is_valid:
+                logger.info("Agent succeeded for skill=%s on attempt=%d", skill_name, attempt + 1)
+                return result
+            else:
+                logger.warning(
+                    "Response validation failed for skill=%s attempt=%d: %s",
+                    skill_name,
+                    attempt + 1,
+                    "; ".join(validation_issues)
+                )
+                # If last attempt, return what we have (with INCOMPLETE markers)
+                if attempt == max_retries - 1:
+                    for check_id in response_format.keys():
+                        check_id_str = str(check_id)
+                        if check_id_str not in result or not isinstance(result.get(check_id_str), dict):
+                            result[check_id_str] = {
+                                "Status": "INCOMPLETE",
+                                "Note / Feedback": "Response validation failed"
+                            }
+                    return result
+                # Otherwise continue to next retry
+                continue
+        except Exception as e:
+            logger.warning(
+                "Agent invocation failed for skill=%s attempt=%d error=%s",
+                skill_name,
+                attempt + 1,
+                str(e),
+                exc_info=True,
+            )
+            # If last attempt, return INCOMPLETE for all checks
+            if attempt == max_retries - 1:
+                result = {}
+                for check_id in response_format.keys():
+                    check_id_str = str(check_id)
+                    result[check_id_str] = {
+                        "Status": "INCOMPLETE",
+                        "Note / Feedback": f"Failed after {max_retries} attempts: {str(e)[:100]}"
+                    }
+                return result
+            # Otherwise continue to next retry
+            continue
+    
+    # Should not reach here, but fallback
+    result = {}
+    for check_id in response_format.keys():
+        check_id_str = str(check_id)
+        result[check_id_str] = {
+            "Status": "INCOMPLETE",
+            "Note / Feedback": "All retry attempts exhausted"
+        }
+    return result
+
 
 
 def parse_agent_result(agent_result: Any, response_format: Dict[str, Any]) -> Dict[str, Any]:
@@ -313,6 +591,47 @@ def execute_skill(
     )
 
     try:
+        # IMPROVEMENT #6: Validate input file size before processing
+        is_valid_size, size_message = _validate_input_file_size(
+            raw_source_text=raw_source_text,
+            skillset=skillset,
+            skill_name=skill_name,
+        )
+        logger.info("File size validation: %s", size_message)
+        
+        if not is_valid_size:
+            logger.warning("Input file too large, marking all checks as SKIPPED")
+            response_format_temp = {}
+            try:
+                temp_bundle = load_skill_bundle(
+                    project_root=project_root,
+                    registry_path=registry_path,
+                    skill_name=skill_name,
+                    skillset=skillset,
+                )
+                response_format_temp = temp_bundle.get("response_format", {})
+            except Exception as e:
+                logger.debug("Could not load skill for format info: %s", str(e))
+            
+            # Return SKIPPED for all checks
+            result = {}
+            for check_id in response_format_temp.keys():
+                check_id_str = str(check_id)
+                result[check_id_str] = {
+                    "Status": "SKIPPED",
+                    "Note / Feedback": f"File too large for evaluation: {size_message}"
+                }
+            return {
+                "allowed": True,
+                "status": "success",
+                "skill_name": skill_name,
+                "criterion": criterion,
+                "reason": "File too large - evaluation skipped",
+                "result": result,
+                "policy_decision": None,
+                "error": None,
+            }
+        
         logger.info("Loading skill bundle skill=%s skillset=%s", skill_name, skillset or "")
         skill_bundle = load_skill_bundle(
             project_root=project_root,
@@ -320,6 +639,22 @@ def execute_skill(
             skill_name=skill_name,
             skillset=skillset,
         )
+        
+        # IMPROVEMENT #1: Build skill-specific prompts instead of using generic one
+        logger.debug("Building skill-specific prompt for skillset=%s skill=%s", skillset or "default", skill_name)
+        skill_specific_prompt = build_review_prompt(
+            skillset=skillset or "default",
+            skill_definition=skill_bundle
+        )
+        prompt = skill_specific_prompt  # Override the generic prompt with skill-specific one
+        
+        # Also build skill-specific prompt trace templates if needed
+        if prompt_trace_templates is None:
+            prompt_trace_templates = build_review_prompt_trace_templates(
+                skillset=skillset or "default",
+                skill_definition=skill_bundle
+            )
+        
         numbered_source_text = build_numbered_source_text(raw_source_text)
         logger.info("Calling agent for skill=%s file=%s", skill_name, input_file_name)
         response_format = skill_bundle.get("response_format")
@@ -395,49 +730,40 @@ def execute_skill(
             raise
         
         try:
-            logger.debug("Invoking agent for skill=%s", skill_name)
-            agent_raw_output = _invoke_agent(
+            logger.debug("Invoking agent with retry logic for skill=%s", skill_name)
+            # IMPROVEMENT #5: Use retry logic with progressive simplification
+            result = _invoke_agent_with_retry(
                 agent_executor=agent_executor,
+                llm=llm,
+                prompt=prompt,
+                skill_bundle=skill_bundle,
+                skillset=skillset,
                 prompt_values=prompt_values,
                 messages=messages,
+                response_format=response_format,
                 max_agent_iterations=max_agent_iterations,
+                skill_name=skill_name,
             )
-            logger.debug("Agent invocation completed for skill=%s", skill_name)
+            logger.debug("Agent invocation with retry completed for skill=%s", skill_name)
         except Exception as invoke_exc:
             logger.error(
-                "Failed to invoke agent for skill=%s error=%s",
+                "Failed to invoke agent with retry for skill=%s error=%s",
                 skill_name,
                 str(invoke_exc),
                 exc_info=True,
             )
-            raise
+            # Return INCOMPLETE for all checks on fatal error
+            result = {}
+            for check_id in response_format.keys():
+                check_id_str = str(check_id)
+                result[check_id_str] = {
+                    "Status": "INCOMPLETE",
+                    "Note / Feedback": f"Fatal error during invocation: {str(invoke_exc)[:100]}"
+                }
         
-        try:
-            # Serialize agent output for logging (full output, no truncation)
-            if isinstance(agent_raw_output, dict) and "output" in agent_raw_output:
-                output_str = agent_raw_output.get("output", "")
-            else:
-                output_str = str(agent_raw_output)
-        except Exception:
-            output_str = str(agent_raw_output)
-        logger.info(
-            "Agent raw output for skill=%s: %s",
-            skill_name,
-            output_str,
-        )
-        
-        try:
-            logger.debug("Parsing agent result for skill=%s", skill_name)
-            result = parse_agent_result(agent_raw_output, response_format)
-            logger.debug("Agent result parsed successfully for skill=%s", skill_name)
-        except Exception as parse_exc:
-            logger.error(
-                "Failed to parse agent result for skill=%s error=%s",
-                skill_name,
-                str(parse_exc),
-                exc_info=True,
-            )
-            raise
+        if result:
+            # Result already validated by _invoke_agent_with_retry
+            logger.debug("Using result from _invoke_agent_with_retry for skill=%s", skill_name)
         if agent_input_trace_path is not None:
             update_agent_input_trace_skill(
                 trace_path=agent_input_trace_path,

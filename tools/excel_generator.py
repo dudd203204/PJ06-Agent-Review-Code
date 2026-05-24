@@ -210,8 +210,9 @@ def create_excel_output(
             fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
             font = Font(color="9C0006")
         else:
-            fill = None
-            font = Font()
+            # For other statuses (INCOMPLETE, NOT_APPLICABLE, etc.), use light gray
+            fill = PatternFill(start_color="F2F2F2", end_color="F2F2F2", fill_type="solid")
+            font = Font(color="333333")
         
         # Apply styling to status column
         ws[f'C{row}'].fill = fill
