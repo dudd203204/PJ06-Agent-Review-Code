@@ -1,0 +1,2883 @@
+{
+  "label": "Main",
+  "customClass": "main-wrapper",
+  "key": "main",
+  "type": "well",
+  "input": false,
+  "tableView": false,
+  "components": [
+    {
+      "type": "panel",
+      "title": "General Data",
+      "key": "generalData",
+      "components": [
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Supplier Name:",
+                  "key": "supplierName",
+                  "input": true,
+                  "tableView": true,
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "SAP No.:",
+                  "key": "sapNo",
+                  "input": true,
+                  "tableView": true,
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            }
+          ],
+          "key": "columns",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Division And Business Location:",
+                  "key": "divisionAndBusinessLocation",
+                  "input": true,
+                  "tableView": true,
+                  "description": "Ex: 9081/6171, 9082/6832",
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            },
+            {
+              "components": [
+                {
+                  "label": "Payment Date:",
+                  "format": "yyyy-MM-dd",
+                  "tableView": false,
+                  "datePicker": {
+                    "disableWeekends": false,
+                    "disableWeekdays": false
+                  },
+                  "enableTime": false,
+                  "enableMinDateInput": false,
+                  "enableMaxDateInput": false,
+                  "validateWhenHidden": false,
+                  "key": "paymentDate",
+                  "type": "datetime",
+                  "input": true,
+                  "description": "(dd/mm/aaaa)",
+                  "validate": {
+                    "required": true
+                  },
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "locale": "en",
+                    "useLocaleSettings": false,
+                    "allowInput": true,
+                    "mode": "single",
+                    "enableTime": false,
+                    "noCalendar": false,
+                    "format": "yyyy-MM-dd",
+                    "hourIncrement": 1,
+                    "minuteIncrement": 1,
+                    "time_24hr": false,
+                    "minDate": null,
+                    "disableWeekends": false,
+                    "disableWeekdays": false,
+                    "maxDate": null
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            }
+          ],
+          "key": "columns1",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Requester:",
+                  "key": "requester",
+                  "input": true,
+                  "tableView": true,
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Extension:",
+                  "key": "extension",
+                  "input": true,
+                  "tableView": true,
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            }
+          ],
+          "key": "columns2",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Requester Manager:",
+                  "key": "requesterManager",
+                  "input": true,
+                  "tableView": true,
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Department:",
+                  "key": "department",
+                  "input": true,
+                  "tableView": true,
+                  "validate": {
+                    "required": true
+                  }
+                }
+              ],
+              "width": 6,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 6
+            }
+          ],
+          "key": "columns3",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Advance Expiration:",
+          "format": "yyyy-MM-dd",
+          "tableView": false,
+          "datePicker": {
+            "disableWeekends": false,
+            "disableWeekdays": false
+          },
+          "enableTime": false,
+          "enableMinDateInput": false,
+          "enableMaxDateInput": false,
+          "validateWhenHidden": false,
+          "key": "advanceExpiration",
+          "type": "datetime",
+          "input": true,
+          "widget": {
+            "type": "calendar",
+            "displayInTimezone": "viewer",
+            "locale": "en",
+            "useLocaleSettings": false,
+            "allowInput": true,
+            "mode": "single",
+            "enableTime": false,
+            "noCalendar": false,
+            "format": "yyyy-MM-dd",
+            "hourIncrement": 1,
+            "minuteIncrement": 1,
+            "time_24hr": false,
+            "minDate": null,
+            "disableWeekends": false,
+            "disableWeekdays": false,
+            "maxDate": null
+          }
+        }
+      ],
+      "input": false,
+      "tableView": false,
+      "label": "Panel",
+      "logic": [
+        {
+          "name": "Disable panel when step_order > 0",
+          "trigger": {
+            "type": "javascript",
+            "javascript": "if(data.sys_request_info) {\n  if(data.sys_request_info.current_step_info) {\n    result = (data.sys_request_info.current_step_info.step_order > 0);\n  }\n}"
+          },
+          "actions": [
+            {
+              "name": "Disable all children",
+              "type": "property",
+              "property": {
+                "label": "Disabled",
+                "value": "disabled",
+                "type": "boolean"
+              },
+              "state": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "panel",
+      "title": "National Suppliers",
+      "key": "nationalSuppliers",
+      "components": [
+        {
+          "type": "checkbox",
+          "label": "1) Advance To National Suppliers",
+          "key": "AdvanceToNationalSuppliers",
+          "input": true,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Order No.:",
+                  "applyMaskOn": "change",
+                  "disabled": true,
+                  "tableView": true,
+                  "calculateValue": "value = !data.AdvanceToNationalSuppliers ? '' : (data.orderNo ? data.orderNo : value);",
+                  "validateWhenHidden": false,
+                  "key": "orderNo",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textfield",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Total Value:",
+                  "key": "totalValue",
+                  "input": true,
+                  "tableView": true,
+                  "disabled": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "calculateValue": "value = !data.AdvanceToNationalSuppliers ? '' : (data.totalValue ? data.totalValue : value);"
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "% Of Advance:",
+                  "key": "ofAdvance",
+                  "input": true,
+                  "tableView": true,
+                  "disabled": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "calculateValue": "value = !data.AdvanceToNationalSuppliers ? '' : (data.ofAdvance ? data.ofAdvance : value);"
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns4",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Advance Value:",
+                  "key": "advanceValue",
+                  "input": true,
+                  "tableView": true,
+                  "disabled": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "calculateValue": "value = !data.AdvanceToNationalSuppliers ? '' : (data.advanceValue ? data.advanceValue : value);"
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Guarantee:",
+                  "optionsLabelPosition": "right",
+                  "inline": true,
+                  "disabled": true,
+                  "tableView": false,
+                  "defaultValue": "yes",
+                  "values": [
+                    {
+                      "label": "Yes",
+                      "value": "yes",
+                      "shortcut": ""
+                    },
+                    {
+                      "label": "No",
+                      "value": "no",
+                      "shortcut": ""
+                    }
+                  ],
+                  "calculateValue": "if (data.AdvanceToNationalSuppliers && !data.gurantee) value = 'yes'",
+                  "allowCalculateOverride": true,
+                  "validateWhenHidden": false,
+                  "key": "guarantee",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear value",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "radio",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Which?",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "disabled": true,
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a041fd4dc026b53d7809835"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "which",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '' && data.guarantee && data.guarantee === 'yes');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '' && data.guarantee && data.guarantee === 'yes');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "sort": "data.label",
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false,
+                  "input": true
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns6",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Justification (Cases Without Guarantee):",
+                  "applyMaskOn": "change",
+                  "autoExpand": false,
+                  "disabled": true,
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "justificationCasesWithoutGuarantee",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '' && data.guarantee && data.guarantee === 'no');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '' && data.guarantee && data.guarantee === 'no');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textarea",
+                  "input": true
+                }
+              ],
+              "width": 8,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 8
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Reason For Request:",
+                  "key": "reasonForRequest",
+                  "input": true,
+                  "tableView": true,
+                  "disabled": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    }
+                  ],
+                  "calculateValue": "value = !data.AdvanceToNationalSuppliers ? '' : (data.reasonForRequest ? data.reasonForRequest : value);"
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns5",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Advance For Purchase Of:",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "disabled": true,
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a042113dc026b53d780a218"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "advanceForPurchaseOf",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "sort": "data.key",
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false,
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Specify:",
+                  "description": "(others)",
+                  "applyMaskOn": "change",
+                  "disabled": true,
+                  "tableView": true,
+                  "calculateValue": "value = !data.AdvanceToNationalSuppliers ? '' : (data.specifyNationalSuppliers ? data.specifyNationalSuppliers : value);",
+                  "validateWhenHidden": false,
+                  "key": "specifyNationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '' && data.advanceForPurchaseOf && data.advanceForPurchaseOf.key.startsWith('outros') );"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '' && data.advanceForPurchaseOf && data.advanceForPurchaseOf.key.startsWith('outros'));"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textfield",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Destination:",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "disabled": true,
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a042098dc026b53d7809def"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "destinationNationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToNationalSuppliers && data.AdvanceToNationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "sort": "data.key",
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false,
+                  "input": true
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns7",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "HTML",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "content": "HTML-NATIONAL-NOTE",
+          "refreshOnChange": false,
+          "key": "html1",
+          "type": "htmlelement",
+          "input": false,
+          "tableView": false
+        }
+      ],
+      "input": false,
+      "tableView": false,
+      "label": "Panel"
+    },
+    {
+      "type": "panel",
+      "title": "International Suppliers",
+      "key": "internationalSuppliers",
+      "components": [
+        {
+          "type": "checkbox",
+          "label": "2) Advance To International Suppliers",
+          "key": "AdvanceToInternationalSuppliers",
+          "input": true,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Order/Contract No.:",
+                  "key": "ordercontractNo",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Modality:",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a0421fcdc026b53d780ab6e"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "modality",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "input": true,
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Currency:",
+                  "key": "currency",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns8",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Total Value:",
+                  "key": "totalValueInternationalSuppliers",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "% Of Advance:",
+                  "key": "ofAdvanceInternationalSuppliers",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Advance Value:",
+                  "key": "advanceValueInternationalSuppliers",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns14",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "INCOTERM:",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "incoterm",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textfield",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Shipment Date:",
+                  "format": "yyyy-MM-dd",
+                  "tableView": false,
+                  "datePicker": {
+                    "disableWeekends": false,
+                    "disableWeekdays": false
+                  },
+                  "enableTime": false,
+                  "enableMinDateInput": false,
+                  "enableMaxDateInput": false,
+                  "validateWhenHidden": false,
+                  "key": "shipmentDate",
+                  "type": "datetime",
+                  "input": true,
+                  "widget": {
+                    "type": "calendar",
+                    "displayInTimezone": "viewer",
+                    "locale": "en",
+                    "useLocaleSettings": false,
+                    "allowInput": true,
+                    "mode": "single",
+                    "enableTime": false,
+                    "noCalendar": false,
+                    "format": "yyyy-MM-dd",
+                    "hourIncrement": 1,
+                    "minuteIncrement": 1,
+                    "time_24hr": false,
+                    "minDate": null,
+                    "disableWeekends": false,
+                    "disableWeekdays": false,
+                    "maxDate": null
+                  },
+                  "description": "Modelo: dd/mm/aaaa",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Invoice No. (Proforma):",
+                  "key": "invoiceNoProforma",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns13",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Case No.:",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "caseNo",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textfield",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "NCM Of Merchandise:",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "ncmOfMerchandise",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textfield",
+                  "input": true
+                }
+              ],
+              "width": 8,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 8
+            }
+          ],
+          "key": "columns12",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Guarantee:",
+                  "optionsLabelPosition": "right",
+                  "inline": true,
+                  "disabled": true,
+                  "tableView": false,
+                  "defaultValue": "yes",
+                  "values": [
+                    {
+                      "label": "Yes",
+                      "value": "yes",
+                      "shortcut": ""
+                    },
+                    {
+                      "label": "No",
+                      "value": "no",
+                      "shortcut": ""
+                    }
+                  ],
+                  "calculateValue": "if (data.AdvanceToInternationalSuppliers && !data.guaranteeInternationalSuppliers) value = 'yes'",
+                  "allowCalculateOverride": true,
+                  "validateWhenHidden": false,
+                  "key": "guaranteeInternationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear value",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "radio",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Which?:",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a042175dc026b53d780a8a4"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "whichInternationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '' && data.guaranteeInternationalSuppliers && data.guaranteeInternationalSuppliers === 'yes');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '' && data.guaranteeInternationalSuppliers && data.guaranteeInternationalSuppliers === 'yes');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false,
+                  "input": true
+                }
+              ],
+              "width": 8,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 8
+            }
+          ],
+          "key": "columns11",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Justification (Cases Without Guarantee):",
+                  "applyMaskOn": "change",
+                  "autoExpand": false,
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "justificationCasesWithoutGuaranteeInternationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '' && data.guaranteeInternationalSuppliers && data.guaranteeInternationalSuppliers === 'no');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '' && data.guaranteeInternationalSuppliers && data.guaranteeInternationalSuppliers === 'no');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textarea",
+                  "input": true
+                }
+              ],
+              "width": 8,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 8
+            },
+            {
+              "components": [
+                {
+                  "type": "textfield",
+                  "label": "Reason For Request:",
+                  "key": "reasonForRequestInternationalSuppliers",
+                  "input": true,
+                  "tableView": true,
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns10",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "Columns",
+          "columns": [
+            {
+              "components": [
+                {
+                  "label": "Advance For Purchase Of:",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a042113dc026b53d780a218"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "advanceForPurchaseOfInternationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false,
+                  "input": true,
+                  "sort": "data.key"
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Specify (Others):",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "specifyOthers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '' && data.advanceForPurchaseOfInternationalSuppliers && data.advanceForPurchaseOfInternationalSuppliers.key.startsWith('outros'));"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '' && data.advanceForPurchaseOfInternationalSuppliers && data.advanceForPurchaseOfInternationalSuppliers.key.startsWith('outros'));"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "textfield",
+                  "input": true
+                }
+              ],
+              "width": 4,
+              "offset": 0,
+              "push": 0,
+              "pull": 0,
+              "size": "md",
+              "currentWidth": 4
+            },
+            {
+              "components": [
+                {
+                  "label": "Destination:",
+                  "widget": "choicesjs",
+                  "placeholder": "Please select",
+                  "tableView": true,
+                  "dataSrc": "resource",
+                  "data": {
+                    "resource": "6a042098dc026b53d7809def"
+                  },
+                  "valueProperty": "data",
+                  "template": "<span>{{ item.data.label }}</span>",
+                  "validateWhenHidden": false,
+                  "key": "destinationInternationalSuppliers",
+                  "logic": [
+                    {
+                      "name": "Enable if condition",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = (data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Enable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": false
+                        },
+                        {
+                          "name": "Set field mandatory",
+                          "type": "property",
+                          "property": {
+                            "label": "Required",
+                            "value": "validate.required",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disable if condition not met",
+                      "trigger": {
+                        "type": "javascript",
+                        "javascript": "result = !(data.AdvanceToInternationalSuppliers && data.AdvanceToInternationalSuppliers !== '');"
+                      },
+                      "actions": [
+                        {
+                          "name": "Disable field",
+                          "type": "property",
+                          "property": {
+                            "label": "Disabled",
+                            "value": "disabled",
+                            "type": "boolean"
+                          },
+                          "state": true
+                        },
+                        {
+                          "name": "Clear field",
+                          "type": "value",
+                          "value": "value = ''"
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "select",
+                  "noRefreshOnScroll": false,
+                  "addResource": false,
+                  "reference": false,
+                  "input": true,
+                  "sort": "data.key"
+                }
+              ],
+              "size": "md",
+              "width": 4,
+              "currentWidth": 4
+            }
+          ],
+          "key": "columns9",
+          "type": "columns",
+          "input": false,
+          "tableView": false
+        },
+        {
+          "label": "HTML",
+          "attrs": [
+            {
+              "attr": "",
+              "value": ""
+            }
+          ],
+          "content": "HTML-INTERNATIONAL-NOTE",
+          "refreshOnChange": false,
+          "key": "html2",
+          "type": "htmlelement",
+          "input": false,
+          "tableView": false
+        }
+      ],
+      "input": false,
+      "tableView": false,
+      "label": "Panel"
+    },
+    {
+      "type": "panel",
+      "title": "Attachments",
+      "key": "attachments",
+      "components": [
+        {
+          "label": "Attachment",
+          "description": "No more than 15MB",
+          "hideLabel": true,
+          "tableView": false,
+          "storage": "s3",
+          "webcam": false,
+          "capture": false,
+          "fileTypes": [
+            {
+              "label": "",
+              "value": ""
+            }
+          ],
+          "filePattern": ".7z,.rar,.tar.gz,.z,.zip,.csv,.dat,.log,.tar,.xml,.email,.eml,.emlx,.msg,.oft,.ost,.pst,.vcf,.ai,.bmp,.fme,.gif,.jpeg,.jpg,.png,.psd,.tif,.svg,.odp,.pps,.ppt,.pptx,.ods,.xls,.xlsm,.xlsx,.xlsb,.xlsx.p7m,.doc,.docx,.odt,.pdf,.rtf,.txt,.wpd,.stp,.xt,.igs,.cgm,.dxf,.dwg,.ofd,.vstx,.vsdx",
+          "fileMaxSize": "15MB",
+          "multiple": true,
+          "validateWhenHidden": false,
+          "key": "attachment",
+          "type": "file",
+          "input": true,
+          "useMultipartUpload": false
+        }
+      ],
+      "input": false,
+      "tableView": false,
+      "label": "Panel"
+    },
+    {
+      "label": "HTML",
+      "attrs": [
+        {
+          "attr": "",
+          "value": ""
+        }
+      ],
+      "content": "Privacy Note",
+      "refreshOnChange": false,
+      "key": "html",
+      "type": "htmlelement",
+      "input": false,
+      "tableView": false
+    },
+    {
+      "label": "Summary",
+      "applyMaskOn": "change",
+      "hidden": true,
+      "tableView": true,
+      "validate": {
+        "maxLength": 250
+      },
+      "validateWhenHidden": false,
+      "key": "summary",
+      "type": "textfield",
+      "input": true,
+      "defaultValue": "Solicitação de adiantamento/pgto antecipado a fornecedor"
+    },
+    {
+      "label": "Validate",
+      "action": "event",
+      "showValidations": true,
+      "tableView": false,
+      "key": "validate",
+      "type": "button",
+      "input": true
+    },
+    {
+      "label": "Admin",
+      "title": "Admin",
+      "collapsible": false,
+      "hidden": true,
+      "key": "admin",
+      "type": "panel",
+      "input": false,
+      "tableView": false,
+      "components": [
+        {
+          "label": "Admin On Approver Edit",
+          "key": "adminOnApproverEdit",
+          "logic": [
+            {
+              "name": "Disable on Approver Edit",
+              "trigger": {
+                "type": "event",
+                "event": "change"
+              },
+              "actions": [
+                {
+                  "name": "File event",
+                  "type": "customAction",
+                  "customAction": "if(data.sys_request_info) {\r\n  if(data.sys_request_info.current_step_info) {\r\n    if(data.sys_request_info.current_step_info.step_order > 0 ) { \r\n       const eventOnDataChange = new CustomEvent(\"onDataChange\", { detail : {data: data, excludeFields: [\"attachment\"]}});\r\n      // document.getElementById(instance.root.id).dispatchEvent(eventOnDataChange)\r\n      window.dispatchEvent(eventOnDataChange)\r\n    }\r\n  }\r\n}"
+                }
+              ]
+            }
+          ],
+          "type": "hidden",
+          "input": true,
+          "tableView": false
+        },
+        {
+          "label": "ADMIN_Sys Attachment Auth",
+          "conditionalAddButton": false,
+          "reorder": false,
+          "addAnotherPosition": "bottom",
+          "layoutFixed": false,
+          "enableRowGroups": false,
+          "initEmpty": true,
+          "hidden": true,
+          "tableView": false,
+          "defaultValue": [
+            {
+              "fieldKey": "",
+              "key": "",
+              "author": "",
+              "field": "",
+              "files": [
+                {
+                  "file": "",
+                  "author": "",
+                  "author_ntid": "",
+                  "author_name": ""
+                }
+              ]
+            }
+          ],
+          "clearOnHide": false,
+          "validateWhenHidden": false,
+          "key": "sys_attachment_auth",
+          "type": "datagrid",
+          "input": true,
+          "components": [
+            {
+              "label": "ADMIN_Field",
+              "applyMaskOn": "change",
+              "tableView": true,
+              "validateWhenHidden": false,
+              "key": "field",
+              "type": "textfield",
+              "input": true
+            },
+            {
+              "label": "ADMIN_Files",
+              "conditionalAddButton": "False",
+              "reorder": false,
+              "addAnotherPosition": "bottom",
+              "layoutFixed": false,
+              "enableRowGroups": false,
+              "initEmpty": true,
+              "tableView": false,
+              "defaultValue": [
+                {
+                  "file": "",
+                  "author": ""
+                }
+              ],
+              "validateWhenHidden": false,
+              "key": "files",
+              "type": "datagrid",
+              "input": true,
+              "components": [
+                {
+                  "label": "ADMIN_File",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "file",
+                  "type": "textfield",
+                  "input": true
+                },
+                {
+                  "label": "ADMIN_Author NTID",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "author_ntid",
+                  "type": "textfield",
+                  "input": true
+                },
+                {
+                  "label": "ADMIN_Author Name",
+                  "applyMaskOn": "change",
+                  "tableView": true,
+                  "validateWhenHidden": false,
+                  "key": "author_name",
+                  "type": "textfield",
+                  "input": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
